@@ -1,16 +1,15 @@
 # Ordering System Creation Process
 
 ##### by hannaa :))
-This document outlines the process for creating an Ordering System, designed to aid small businesses in developing their own digital cashier system. The system is multi-user and not limited to one company.
+process for creating an Ordering System to aid small businesses in developing their own digital cashier system. The system is multi-user and not limited to one company.
 
 ## Proposal Overview
 
 ### Description
-The Ordering System is a modern cashier system that allows multiple users to manage transactions, inventory, and administrative tasks. It is designed to streamline the sales process and improve efficiency for small businesses.
+The Ordering System is a modern cashier system that allows multiple users to manage transactions, inventory, and administrative tasks.
 
 ### Objective
-The primary objective of the Ordering System is to empower small businesses by providing them with a customizable digital cashier solution. The system aims to simplify tasks such as account management, product customization, receipt generation, and user access control.
-
+The primary objective of the Ordering System is to help small businesses by providing them with a customizable digital cashier. 
 ## System Functions
 
 ### Account Creation
