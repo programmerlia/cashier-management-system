@@ -82,14 +82,14 @@ namespace WindowsFormsApp1
             else
             {
                 //pariho dapat password boi
-                if (textBox3.Text == textBox4.Text)
+                if (!(textBox3.Text == textBox4.Text))
                 {
                     AMB.GetInstance().Show("Passwords do not Match", 1500);
                     return;
                 }
 
                 //validate yung email  kasi dapat may ano @
-                if (!textBox4.Text.Contains("'") && !textBox4.Text.Contains(".com"))
+                if (!textBox2.Text.Contains("@") && !textBox2.Text.Contains(".com"))
                 {
                     AMB.GetInstance().Show("Invalid Email", 1500);
                     return;
@@ -103,7 +103,7 @@ namespace WindowsFormsApp1
             {
                 DB.Connect();
 
-                string query = "INSERT INTO tblacccount (AccName, AccUser, AccPass, AccType, AccComp, AccAccess) " +
+                string query = "INSERT INTO tblaccount (AccName, AccUser, AccPass, AccType, AccComp, AccAccess) " +
                                "VALUES (@1, @2, @3, @4, 1, @5, @6);";
 
                 using (MySqlConnection connection = DB.con)
@@ -186,7 +186,7 @@ namespace WindowsFormsApp1
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new frmCompany();
+            new frmCompany().Show();
             this.Hide();
         }
 

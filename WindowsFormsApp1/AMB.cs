@@ -40,5 +40,10 @@ namespace WindowsFormsApp1
                 Show();
             }
         }
+
+        private void AMB_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

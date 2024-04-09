@@ -80,6 +80,7 @@ namespace WindowsFormsApp1
                     }
                     AMB.GetInstance().Show("Created successfully.", 1500);
                     Variables.MAINCOMPANYNAME = textBox3.Text;
+                    new frmSignup().Show();
                     this.Hide();
                 }
 
