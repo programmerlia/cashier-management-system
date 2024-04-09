@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
                         command.Parameters.AddWithValue("@2", textBox2.Text);
                         command.Parameters.AddWithValue("@3", textBox3.Text);
                         command.Parameters.AddWithValue("@5", companyId);
-                        if (bunifuDropdown1.SelectedValue == Variables.MAINCOMPANYNAME)
+                        if (bunifuDropdown1.SelectedValue.ToString() == Variables.MAINCOMPANYNAME)
                         {
                             command.Parameters.AddWithValue("@4", "Admin");
                             command.Parameters.AddWithValue("@6", "1");
