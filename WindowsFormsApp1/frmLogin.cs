@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Windows.Forms;
+using static Bunifu.UI.WinForms.BunifuSnackbar;
 
 namespace WindowsFormsApp1
 {
@@ -25,6 +26,7 @@ namespace WindowsFormsApp1
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+
             try
             {
                 DB.Connect();
@@ -54,6 +56,7 @@ namespace WindowsFormsApp1
                     Variables.MAINID = reader.GetInt32("AccID");
                     Variables.MAINTYPE = reader.GetString("AccType");
                     bool sossss = reader.GetBoolean("AccAccess");
+                    tbusername.Text = sossss.ToString();
 
                     if (sossss.Equals(true))
                     {
@@ -81,7 +84,6 @@ namespace WindowsFormsApp1
             {
                 DB.Disconnect();
             }
-
         }
 
         private void btnSignup_Click(object sender, EventArgs e)

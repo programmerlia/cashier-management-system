@@ -10,6 +10,9 @@
 
         public static bool ACCACCESS;
         public static int ACCTYPE;
+
+
+
     }
 }
 

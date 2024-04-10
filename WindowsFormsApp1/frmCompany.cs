@@ -99,5 +99,10 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void frmCompany_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
