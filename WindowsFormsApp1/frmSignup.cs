@@ -104,7 +104,7 @@ namespace WindowsFormsApp1
                 DB.Connect();
 
                 string query = "INSERT INTO tblaccount (AccName, AccUser, AccPass, AccType, AccComp, AccAccess) " +
-                               "VALUES (@1, @2, @3, @4, 1, @5, @6);";
+                               "VALUES (@1, @2, @3, @4, @5, @6);";
 
                 using (MySqlConnection connection = DB.con)
                 {
@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
                         command.Parameters.AddWithValue("@2", textBox2.Text);
                         command.Parameters.AddWithValue("@3", textBox3.Text);
                         command.Parameters.AddWithValue("@5", companyId);
-                        if (bunifuDropdown1.SelectedValue.ToString() == Variables.MAINCOMPANYNAME)
+                        if (bunifuDropdown1.SelectedItem.ToString() ==Variables.MAINCOMPANYNAME)
                         {
                             command.Parameters.AddWithValue("@4", "Admin");
                             command.Parameters.AddWithValue("@6", "1");
@@ -129,7 +129,8 @@ namespace WindowsFormsApp1
                 }
                 AMB.GetInstance().Show("Created successfully.", 1500);
                 Variables.MAINCOMPANYNAME = textBox3.Text;
-                this.Hide();
+                new frmLogin().Show();
+                this.Dispose();
             }
 
             catch (Exception ex)
@@ -147,7 +148,6 @@ namespace WindowsFormsApp1
         {
             //iscan yung id nung sinelect sa dropdown list para yun ilalagay na AccComp sa account.
             //ginagawa to kasi name lang nasa dropdown, eh dapat CompId kasi yun yung identifier for most parts of the program
-            string selectedCompanyName = bunifuDropdown1.SelectedItem.ToString();
 
             try
             {
@@ -157,7 +157,7 @@ namespace WindowsFormsApp1
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@1", selectedCompanyName);
+                        command.Parameters.AddWithValue("@1", bunifuDropdown1.SelectedItem.ToString());
                         object yungid = command.ExecuteScalar();
                         companyId = Convert.ToInt32(yungid);
                     }
