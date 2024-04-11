@@ -287,5 +287,15 @@ namespace WindowsFormsApp1
             Label lbl2 = parent.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelProdName");
             AddRowToDataGridView1(lbl, lbl2);
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bttnsetting_Click(object sender, EventArgs e)
+        {
+            new frmsettings().Show();
+        }
     }
 }

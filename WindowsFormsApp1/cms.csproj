@@ -228,6 +228,12 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmsettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmsettings.Designer.cs">
+      <DependentUpon>frmsettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSignup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmsettings.resx">
+      <DependentUpon>frmsettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSignup.resx">
       <DependentUpon>frmSignup.cs</DependentUpon>
@@ -317,6 +326,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\no-image-available.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
