@@ -117,12 +117,12 @@ namespace WindowsFormsApp1
                         if (bunifuDropdown1.SelectedItem.ToString() ==Variables.MAINCOMPANYNAME)
                         {
                             command.Parameters.AddWithValue("@4", "Admin");
-                            command.Parameters.AddWithValue("@6", "1");
+                            command.Parameters.AddWithValue("@6", 1);
                         }
                         else
                         {
                             command.Parameters.AddWithValue("@4", "User");
-                            command.Parameters.AddWithValue("@6", "0");
+                            command.Parameters.AddWithValue("@6", 0);
                         }
                         command.ExecuteNonQuery();
                     }

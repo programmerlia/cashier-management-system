@@ -130,3 +130,5 @@ C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\D
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AMB.resources
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmMain.resources
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmProduct.resources
+C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmsettings.resources
+C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmReceipt.resources
