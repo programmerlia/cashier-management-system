@@ -23,6 +23,43 @@ namespace WindowsFormsApp1
             InitializeComponent();
             loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID");
             LoadCategories();
+            if (Variables.MAINTYPE == "Admin")
+            {
+                bttnsetting.Visible = true;
+            } else if (Variables.MAINTYPE=="User")
+            {
+                bttnsetting.Visible = false;
+            }
+
+            DB.Connect();
+            try
+            {
+                
+
+                MySqlCommand msn = new MySqlCommand("SELECT * FROM tbltheme WHERE ThemeID = @ID", DB.con);
+                msn.Parameters.AddWithValue("@ID", Variables.MAINCOMPANYID);
+
+                MySqlDataReader reader = msn.ExecuteReader();
+                while (reader.Read()) {
+                    Variables.clrheader = System.Drawing.ColorTranslator.FromHtml(reader.GetString("colorheader"));
+                    Variables.clrmainbtn = System.Drawing.ColorTranslator.FromHtml(reader.GetString("colormainbutton"));
+
+                    Variables.setColors(Variables.clrheader, panel1);
+                    Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct);
+
+                }
+                reader.Close();
+            }
+
+
+            catch (Exception ex)
+            {
+                AMB.GetInstance().Show(ex.Message, 1500);
+            }
+            finally
+            {
+                DB.Disconnect();
+            }
         }
 
         private void frmMain2_Activated(object sender, EventArgs e)
@@ -38,7 +75,6 @@ namespace WindowsFormsApp1
                 if (reader.Read())
                 {
                     label1.Text = reader.GetString("CompName");
-                    label2.Text = reader.GetInt32("CompBID").ToString();
                     label3.Text = reader.GetString("CompAddr");
 
                     reader.Close();
@@ -67,7 +103,7 @@ namespace WindowsFormsApp1
             {
                 DB.Disconnect();
             }
-
+            resetColors();
             loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID");
         }
 
@@ -198,10 +234,7 @@ namespace WindowsFormsApp1
 
 
 
-        private void btnsearch_Click(object sender, EventArgs e)
-        {
-            loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID AND ProdName LIKE @ProdName");
-        }
+        private void btnsearch_Click(object sender, EventArgs e) => loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID AND ProdName LIKE @ProdName");
 
         private void btnviewallproducts_Click(object sender, EventArgs e)
         {
@@ -244,19 +277,16 @@ namespace WindowsFormsApp1
                         BunifuButton btnCategory = new BunifuButton();
                         btnCategory.Dock = DockStyle.Top;
                         btnCategory.Height = 55;
-                        btnCategory.IdleFillColor = Variables.clrmainbtn;
+
                         btnCategory.IdleBorderRadius = 10;
-                        btnCategory.IdleBorderColor = Color.Transparent;
+
                         btnCategory.ForeColor = Color.White;
                         btnCategory.Text = categoryName;
                         btnCategory.Click += (sender, e) => BtnCategory_Click(sender, e, categoryId);
 
-                        btnCategory.onHoverState.BorderColor = Color.Transparent;
-                        btnCategory.onHoverState.FillColor = SystemColors.ControlDark;
-                        btnCategory.onHoverState.BorderColor = Color.Black;
-                        btnCategory.onHoverState.BorderColor = Color.Transparent;
-                        btnCategory.onHoverState.BorderColor = Color.Black;
-                        btnCategory.onHoverState.BorderColor = Color.White;
+                        
+
+                        Variables.setColorsBunifu(Variables.clrmainbtn, btnCategory);
 
                         pnlcategory.Controls.Add(btnCategory);
                     }
@@ -296,6 +326,42 @@ namespace WindowsFormsApp1
         private void bttnsetting_Click(object sender, EventArgs e)
         {
             new frmsettings().Show();
+        }
+
+        private void resetColors() 
+        {
+            Variables.setColors(Variables.clrheader, panel1);
+            Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct);
+            LoadCategories();
+            btnviewallproducts.OnPressedState.FillColor = Color.Black;
+            bunifuDataGridView1.HeaderBackColor = Variables.clrheader;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnreceipt_Click(object sender, EventArgs e)
+        {
+            new frmReceipt().ShowDialog();
+        }
+
+        private void btnlogout_Click(object sender, EventArgs e)
+        {
+            Variables.MAINNAME="";
+            Variables.MAINCOMPANYID=0;
+            Variables.MAINCOMPANYNAME="";
+            Variables.MAINID=0;
+            Variables.MAINTYPE="";
+            Variables.MAINCOMPANYADDR="";
+            Variables.MAINCOMPANYBID=0;
+
+
+            Variables.ACCACCESS=false;
+            Variables.ACCTYPE=0;
+            this.Hide();
+            new frmLogin().Show();
         }
     }
 }

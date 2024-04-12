@@ -23,11 +23,19 @@ namespace WindowsFormsApp1
             InitializeComponent();
             getDropdownItems();
             panel1.Hide();
+
+            Variables.setColors(Variables.clrheader, this);
+            Variables.setColorsBunifu(Variables.clrmainbtn, btnUpload, bunifuButton1, bunifuButton2);
+            bunifuButton2.IdleFillColor = SystemColors.ControlLight;
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+            string pclass = bunifuDropdown1.SelectedItem.ToString();
 
+            label1.Text = pclass;
+
+            getPclassId(pclass);
         }
 
         private void bunifuButton1_Click(object sender, EventArgs e)
@@ -70,10 +78,10 @@ namespace WindowsFormsApp1
             string query = "SELECT ID FROM tblcategory WHERE CategoryName = @1 AND CompID = @2";
             try
             {
+                DB.Connect();
                 using (MySqlConnection connection = DB.con)
                 {
-                    connection.Open(); 
-
+                    
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@1", pclass);
@@ -87,6 +95,7 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                DB.Disconnect();
             }
             catch (Exception ex)
             {
@@ -223,7 +232,6 @@ namespace WindowsFormsApp1
              insertNewClass(textBox2.Text);
             panel1.Hide();
             getDropdownItems();
-
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

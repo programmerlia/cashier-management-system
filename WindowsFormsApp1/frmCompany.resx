@@ -145,4 +145,13 @@
         QmCC
 </value>
   </data>
+  <data name="btnBack.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAMgAAAAwCAYAAABUmTXqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAACkSURBVHhe7dNBDYAwAMBApE0aXicEGE8WquAel9RAjznn
+        eJzAZqxBVlzA5jQI/DMIBINAMAgEg0AwCASDQDAIBINAMAgEg0AwCASDQDAIBINAMAgEg0AwCASDQDAI
+        BINAMAgEg0AwCASDQDAIBINAMAgEg0AwCASDQDAIBINAMAgEg0AwCASDQDAIBINAMAgEg0AwCASDQDAI
+        BINAeAcZK4CvOW7eQS7lHtLCOwAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -63,8 +64,8 @@ namespace WindowsFormsApp1
                 {
                     DB.Connect();
 
-                    string query = "INSERT INTO tblcompany (CompBID, CompName, CompAddr, CompType, CompTheme, CompImg) " +
-                                   "VALUES (@CompBID, @CompName, @CompAddress, @CompType, 1, @CompImg);";
+                    string query = "INSERT INTO tblcompany (CompBID, CompName, CompAddr, CompType, CompImg) " +
+                                   "VALUES (@CompBID, @CompName, @CompAddress, @CompType, @CompImg);";
 
                     using (MySqlConnection connection = DB.con)
                     {
@@ -79,11 +80,9 @@ namespace WindowsFormsApp1
                         }
                     }
                     AMB.GetInstance().Show("Created successfully.", 1500);
-                    Variables.MAINCOMPANYNAME = textBox3.Text;
-                    new frmSignup().Show();
-                    this.Hide();
-                }
+                    Variables.MAINCOMPANYNAME = textBox2.Text;
 
+                }
                 catch (Exception ex)
                 {
                     AMB.GetInstance().Show(ex.Message, 1500); //pag may error para makita ko ano error
@@ -92,6 +91,40 @@ namespace WindowsFormsApp1
                 {
                     DB.Disconnect();
                 }
+
+
+
+                try
+                {
+                    DB.Connect();
+
+                    //set theme colors ng newly created company to default theme color
+                    string queryy = "INSERT INTO tbltheme (colorheader, colormainbutton, colorsecondarybutton) " +
+                                    "VALUES (@colorheader, @colormainbutton, @colorsecondarybutton);";
+
+                    using (MySqlConnection connection = DB.con)
+                    {
+                        using (MySqlCommand command = new MySqlCommand(queryy, connection))
+                        {
+                            //yung mga hex codes here equivalent ng default rgb values/system colors
+                            command.Parameters.AddWithValue("@colorheader", "#485f78");
+                            command.Parameters.AddWithValue("@colormainbutton", "#99B4D1");
+                            command.Parameters.AddWithValue("@colorsecondarybutton", "#696969");
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AMB.GetInstance().Show(ex.Message, 1500); //pag may error para makita ko ano error
+                }
+                finally
+                {
+                    DB.Disconnect();
+                }
+
+                new frmSignup().Show();
+                this.Hide();
             }
         }
 
@@ -103,6 +136,11 @@ namespace WindowsFormsApp1
         private void frmCompany_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }
