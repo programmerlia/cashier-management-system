@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 *.vsidx
+/WindowsFormsApp1/.vs/cms_project/v17/.suo
