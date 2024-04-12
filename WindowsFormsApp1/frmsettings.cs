@@ -1,13 +1,20 @@
 ﻿using Bunifu.Framework.UI;
+using Bunifu.UI.WinForms;
 using Bunifu.UI.WinForms.BunifuButton;
 using MySql.Data.MySqlClient;
+
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +30,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             resetColors();
+            panel3.Hide();
 
             try
             {
@@ -200,10 +208,7 @@ namespace WindowsFormsApp1
             this.Hide();
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+    
 
         private void buttonYes_Click(object sender, EventArgs e)
         {
@@ -251,11 +256,167 @@ namespace WindowsFormsApp1
         private void bttnreceipt_Click_1(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
+            loadtblReceipt();
         }
 
         private void bttnaccess_Click_1(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 2;
         }
+
+
+        private void loadtblReceipt() {
+            try
+            {
+                DB.Connect();
+                string query = @"
+                    SELECT 
+                        RecName AS Details,
+                        CONCAT(
+                            CASE 
+                                WHEN RecIorD = 'D' THEN '-'
+                                WHEN RecIorD = 'I' THEN '+'
+                                ELSE ''
+                            END,
+                            ' ',
+                            RecAmount,
+                            CASE 
+                                WHEN RecType = 'P' THEN '%'
+                                WHEN RecType = 'N' THEN ''
+                                ELSE RecType
+                            END
+                        ) AS Amount
+                    FROM tblreceipt
+                    WHERE CompId = @1";
+
+                using (MySqlConnection connection = DB.con)
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@1", Variables.MAINCOMPANYID);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                           
+                            tblreceipt.Rows.Clear();
+
+                            while (reader.Read())
+                            {
+                                string details = reader.GetString("Details"); 
+                                string amount = reader.GetString("Amount");
+
+                                tblreceipt.Rows.Add(details, amount);
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+
+                DB.Disconnect();
+            }
+        }
+
+        private void bttninsert_Click(object sender, EventArgs e)
+        {
+            panel3.Show();
+            clearpanel7();
+            bttninsert.Enabled = false;
+
+        }
+
+        private void btncancel_Click(object sender, EventArgs e)
+        {
+            panel3.Hide();
+            bttninsert.Enabled = true;
+        }
+
+        private void btnok_Click(object sender, EventArgs e)
+        {
+            panel3.Hide();
+            bttninsert.Enabled = true;
+
+            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
+            {
+                AMB.GetInstance().Show("Fill All Field", 1500);
+            }
+            else
+            {
+
+                try
+                {
+                    string recIorD;
+                    if (bunifuRadioButton1.Checked) { recIorD = "I"; } else { recIorD = "D"; };
+                    string recName = textBox1.Text;
+                    string recValue =  textBox2.Text;
+                    string recType;
+                    if (bunifuRadioButton4.Checked) { recType = "P"; } else { recType = "N"; };
+
+                    DB.Connect();
+                    string query = "INSERT INTO tblreceipt (CompID, RecName, RecAmount, RecIorD, RecType) VALUES (@1, @2, @3, @4, @5)";
+                    using (MySqlConnection connection = DB.con)
+                    {
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@1", Variables.MAINCOMPANYID);
+                            command.Parameters.AddWithValue("@2", recName);
+                            command.Parameters.AddWithValue("@3", recValue);
+                            command.Parameters.AddWithValue("@4", recIorD);
+                            command.Parameters.AddWithValue("@5", recType);
+                            command.ExecuteNonQuery();
+                            loadtblReceipt();
+                            
+                        }
+                    }
+                    DB.Disconnect();
+                }
+                catch (Exception ex)
+                {
+                     AMB.GetInstance().Show("An error occurred:" + ex.Message, 1500);
+                }
+                
+            }
+        }
+
+        private void clearpanel7() {
+            textBox1.Clear();
+            textBox2.Clear();
+        }
+
+        private void tblreceipt_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            foreach (DataGridViewColumn column in tblreceipt.Columns)
+            {
+                Console.WriteLine(column.Name);
+            }
+            try
+            {
+                DB.Connect();
+                string recName = e.Row.Cells[0].Value.ToString();
+                string deleteQuery = "DELETE FROM tblreceipt WHERE RecName = @1 AND CompID = @2";
+
+                using (MySqlConnection connection = DB.con)
+                {
+                    using (MySqlCommand command = new MySqlCommand(deleteQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@1", recName);
+                        command.Parameters.AddWithValue("@2", Variables.MAINCOMPANYID);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                DB.Disconnect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting row: " + ex.Message);
+            }
+        }
     }
-}
+    }
+
+
