@@ -14,5 +14,14 @@ namespace WindowsFormsApp1
                 return ms.ToArray();
             }
         }
+
+
+        private Color DarkenColor(Color color, float factor)
+        {
+            int r = (int)(color.R * (1 - factor));
+            int g = (int)(color.G * (1 - factor));
+            int b = (int)(color.B * (1 - factor));
+            return Color.FromArgb(r, g, b);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Bunifu.Framework.UI;
 using Bunifu.UI.WinForms.BunifuButton;
+
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -24,11 +25,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID");
 
-            //panel10.Controls.Clear();
-
-            flowLayoutPanel2.Width = splitContainer1.Panel2MinSize-10;
-            label9.Left = splitContainer1.Panel2MinSize-label9.Width-50;
-
+            flowLayoutPanel2.Controls.Clear();
             LoadCategories();
             if (Variables.MAINTYPE == "Admin")
             {
@@ -134,11 +131,10 @@ namespace WindowsFormsApp1
                     while (reader.Read())
                     {
                         BunifuCards bunifuCard = new BunifuCards { Size = new Size(150, 150), BorderRadius = 20, color = Variables.clrheader };
-                        bunifuCard.Click += buttonOrder_Click;
                         flowLayoutPanel1.Controls.Add(bunifuCard);
 
-
                         PictureBox pictureBox = new PictureBox { SizeMode = PictureBoxSizeMode.StretchImage, Size = new Size(80, 80), Location = new Point(30, 10), };
+                        pictureBox.Click += buttonOrder_Click;
                         byte[] imageData = (byte[])reader["ProdImg"];
                         using (MemoryStream ms = new MemoryStream(imageData))
                         {
@@ -146,7 +142,9 @@ namespace WindowsFormsApp1
                         }
                         bunifuCard.Controls.Add(pictureBox);
                         pictureBox.Left = (pictureBox.Parent.Width - pictureBox.Width) / 2;
-                        pictureBox.Top = 10;
+
+
+                  
 
 
                         Label labelProdName = new Label { Text = reader.GetString("ProdName"), Font = new Font("Century Gothic", 10, FontStyle.Bold), Location = new Point(100,32), TextAlign = ContentAlignment.MiddleCenter };
@@ -187,8 +185,7 @@ namespace WindowsFormsApp1
 
 
 
-     
-
+      
 
 
         private void btnsearch_Click(object sender, EventArgs e) => loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID AND ProdName LIKE @ProdName");
@@ -268,11 +265,48 @@ namespace WindowsFormsApp1
         private void buttonOrder_Click(object sender, EventArgs e)
         {
 
-            Control button = (Control)sender;
-            Label lbl2 = button.Controls.OfType<Label>().ElementAt(1);
-            Label lbl = button.Controls.OfType<Label>().ElementAt(0);
-            addtopanel10(lbl.Text.ToString() , lbl2.Text.ToString());
-            updateTotal();
+            Control lal = (Control)sender;
+            Control button = lal.Parent ;
+            Label lbl2 = button.Controls.OfType<Label>().FirstOrDefault(b => b.Name == "labelProdName");
+            Label lbl = button.Controls.OfType<Label>().FirstOrDefault(b => b.Name == "labelPrice");
+
+
+
+            bool alreadyExists = false;
+            if (flowLayoutPanel2.Controls.Count == 0)
+            {
+                alreadyExists = false;
+            }
+            else
+            {
+             foreach (Control control in flowLayoutPanel2.Controls)
+                        {
+                            foreach (Label l in control.Controls)
+                            {
+                                if (l.Text == lbl2.Text)
+                                {
+                                    BunifuButton buttonPlus = l.Parent.Controls.OfType<BunifuButton>().FirstOrDefault(b => b.Name == "buttonPlus");
+                                    buttonPlus.PerformClick();
+                            alreadyExists = true;
+                                    break;
+                                }
+                        break;
+                            }
+               
+
+                }
+
+
+            }
+           
+
+            if (!alreadyExists)
+            {
+                addtopanel10(lbl2.Text.ToString(), lbl.Text.ToString());
+                updateTotal();
+            }
+            alreadyExists = false;
+
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -319,15 +353,13 @@ namespace WindowsFormsApp1
             Variables.prodprice.Clear();
             Variables.prodqp.Clear();
 
-            foreach (var bunbun in flowLayoutPanel2.Controls.OfType<BunifuCards>())
+            foreach (var panpan in flowLayoutPanel2.Controls.OfType<Panel>())
             {
 
-                Panel panpan = bunbun.Controls.OfType<Panel>().FirstOrDefault();
-                Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault();
-                Panel quantpan = panpan.Controls.OfType<Panel>().FirstOrDefault();
-                Label labelQuantity = quantpan.Controls.OfType<Label>().FirstOrDefault();
-                Label labelPrice = panpan.Controls.OfType<Label>().ElementAt(1);
-                Label labelPriceActual = panpan.Controls.OfType<Label>().ElementAt(3);
+                Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelName");
+                Label labelQuantity = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelQuantity");
+                Label labelPrice = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPrice");
+                Label labelPriceActual = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPriceActual");
 
                 Variables.prodname.Add(labelName.Text);
                 Variables.prodquant.Add(Convert.ToDouble(labelQuantity.Text));
@@ -359,55 +391,98 @@ namespace WindowsFormsApp1
 
         private void addtopanel10(string n, string p)
         {
-            BunifuCards bunbun = new BunifuCards { Width=50, Height = 50, Location = new Point(10, 10), Dock = DockStyle.Top, color=Variables.clrheader, BorderRadius=0, Margin=new Padding(0,0,0,0), Padding=new Padding(0,0,0,0)};
-            flowLayoutPanel2.Controls.Add(bunbun);
 
-            bunbun.Width = bunbun.Parent.Width-20;
+            Panel panpan = new Panel {
+                Width = 315,
+                Height = 50,
+                BackColor = Variables.clrheader,
+                 Location = new Point(0,0 ),
+                Anchor = AnchorStyles.Top| AnchorStyles.Left | AnchorStyles.Right
 
-            Panel panpan = new Panel { Dock = DockStyle.Fill, BackColor = Variables.clrheader};
-            bunbun.Controls.Add(panpan);
+            };
+            flowLayoutPanel2.Controls.Add(panpan);
 
-            Label labelName = new Label { Text = n, TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Location = new Point(1, 7), Size = new Size(100, 37) };
+
+            Label labelName = new Label { Text = n, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Location = new Point(11, 7), Size = new Size(155, 37) };
             labelName.Name = "labelName";
             panpan.Controls.Add(labelName);
 
-            Panel quantpan = new Panel { Width=70, Height = bunbun.Height, Left=labelName.Width+5};
-            panpan.Controls.Add(quantpan);
 
-            BunifuButton buttonMinus = new BunifuButton { Text = "-", Size = new Size(20, 20), IdleBorderRadius = 20, IdleBorderColor = Color.Transparent, BackColor = Color.Transparent, IdleFillColor = Variables.clrsecondarybtn, ForeColor = Color.White, Cursor = Cursors.Hand, TextAlign = ContentAlignment.MiddleCenter, Anchor = AnchorStyles.Left, Top = 13 };
-            buttonMinus.Name = "buttonMinus";
-            buttonMinus.Click += button1_Click;
-            quantpan.Controls.Add(buttonMinus);
 
-            Label labelQuantity = new Label { Text = "1", TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 12), ForeColor = Color.White, Location = new Point(203, 7), Size = new Size(17, 37) };
+
+            Label labelQuantity = new Label {
+                Text = "1",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Century Gothic", 12),
+                ForeColor = Color.White,
+                BackColor = Color.Transparent,
+                Location = new Point(203,7), 
+                Size = new Size(17, 37),
+                Anchor = AnchorStyles.Right
+            };
             labelQuantity.Name = "labelQuantity";
             labelQuantity.TextChanged += LabelQuantity_TextChanged;
-            quantpan.Controls.Add(labelQuantity);
+            panpan.Controls.Add(labelQuantity);
 
-            labelQuantity.Left = (quantpan.Width - labelQuantity.Width) / 2;
+            BunifuButton buttonMinus = new BunifuButton
+            {
+                Text = "-",
+                Size = new Size(20, 20),
+                IdleBorderRadius = 20,
+                IdleBorderColor = Color.Transparent,
+                BackColor = Color.Transparent,
+                IdleFillColor = Variables.clrsecondarybtn,
+                ForeColor = Color.White,
+                Location = new Point(173, 13),
+                Cursor = Cursors.Hand,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Anchor = AnchorStyles.Right
+            };
+            buttonMinus.Name = "buttonMinus";
+
+            panpan.Controls.Add(buttonMinus);
+            buttonMinus.Click += button1_Click;
 
 
-            BunifuButton buttonPlus = new BunifuButton { Text = "+", Size = new Size(20, 20), IdleBorderRadius = 20, BackColor = Color.Transparent, IdleBorderColor = Color.Transparent, IdleFillColor = Variables.clrsecondarybtn, ForeColor = Color.White, Cursor = Cursors.Hand, TextAlign = ContentAlignment.MiddleCenter, Location = new Point(0 , 13) };
+            BunifuButton buttonPlus = new BunifuButton { 
+                Text = "+", Size = new Size(20, 20), 
+                IdleBorderRadius = 20, 
+                BackColor = Color.Transparent, 
+                IdleBorderColor = Color.Transparent, 
+                IdleFillColor = Variables.clrsecondarybtn, 
+                ForeColor = Color.White, Cursor = Cursors.Hand, 
+                TextAlign = ContentAlignment.MiddleCenter, 
+                Location = new Point(222, 18),
+                Anchor = AnchorStyles.Right
+            
+            };
             buttonPlus.Name = "buttonPlus";
             buttonPlus.Click += button2_Click;
-            quantpan.Controls.Add(buttonPlus);
-
-            buttonPlus.Left = quantpan.Width - buttonPlus.Width;
+            panpan.Controls.Add(buttonPlus);
 
 
-            Label labelPrice = new Label { Text = p, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Anchor=AnchorStyles.Right, Top=7, Size = new Size(45, 37), Visible = false };
-            labelName.Name = "labelPrice";
+
+            Label labelPrice = new Label { Text = p, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Anchor=AnchorStyles.Right,
+                Location = new Point(266, 7),
+                Size = new Size(45, 37), Visible = false,};
+            labelPrice.Name = "labelPrice";
             panpan.Controls.Add(labelPrice);
 
             //label na mag-didisplay nung price as P00.00 na format and the only one visible
-            Label labelPriceNew = new Label { Text = "P"+p, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Location = new Point(0, 7), Size = new Size(45, 37)};
+            Label labelPriceNew = new Label { Text = "P"+p, 
+                TextAlign = ContentAlignment.MiddleCenter, 
+                Font = new Font("Century Gothic", 10), 
+                ForeColor = Color.White, 
+                Location = new Point(266, 7), 
+                Size = new Size(45, 37),
+                Anchor = AnchorStyles.Right
+            };
             labelPriceNew.Name = "labelPriceNew";
             panpan.Controls.Add(labelPriceNew);
-            labelPriceNew.Left = bunbun.Width - labelPriceNew.Width - 12;
 
             //label na mag-stostore nung actual double na price
             Label labelPriceActual = new Label { Text = p, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Location = new Point(0, 7), Size = new Size(45, 37), Visible=false };
-            labelPriceNew.Name = "labelPriceNew";
+            labelPriceActual.Name = "labelPriceActual";
             panpan.Controls.Add(labelPriceActual);
 
             Variables.setColorsBunifuSecond(Variables.clrsecondarybtn, buttonPlus, buttonMinus);
@@ -441,7 +516,7 @@ namespace WindowsFormsApp1
                 lbl.Text = (Convert.ToInt64(lbl.Text) - 1).ToString();
                 if (Convert.ToInt64(lbl.Text) == 0)
                 {
-                    parent.Parent.Parent.Parent.Controls.Remove(parent.Parent.Parent);
+                    parent.Parent.Controls.Remove(parent);
                 }
 
             }
@@ -451,12 +526,11 @@ namespace WindowsFormsApp1
         private void LabelQuantity_TextChanged(object sender, EventArgs e)
         {
             Control button = (Control)sender;
-            Control parent = button.Parent;//quantpan
-            Control parentp = button.Parent.Parent;//panpan
-            Label labelQuantity = parent.Controls.OfType<Label>().FirstOrDefault();
-            Label labelPrice = parentp.Controls.OfType<Label>().ElementAt(1);
-            Label labelPriceNew = parentp.Controls.OfType<Label>().ElementAt(2);
-            Label labelPriceActual = parentp.Controls.OfType<Label>().ElementAt(3);
+            Control parent = button.Parent;//panpan
+            Label labelQuantity = parent.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelQuantity");
+            Label labelPrice = parent.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPrice");
+            Label labelPriceNew = parent.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPriceNew");
+            Label labelPriceActual = parent.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPriceActual");
 
             double q = Convert.ToDouble(labelQuantity.Text);
             double p = Convert.ToDouble(labelPrice.Text);
@@ -494,16 +568,24 @@ namespace WindowsFormsApp1
 
         private void updateTotal() {
             total = 0;
-            foreach (Control bunbun in flowLayoutPanel2.Controls.OfType<BunifuCards>())
+            foreach (Control bunbun in flowLayoutPanel2.Controls.OfType<Panel>())
             {
-                Panel panpan = bunbun.Controls.OfType<Panel>().FirstOrDefault();
-                Panel quantpan = panpan.Controls.OfType<Panel>().FirstOrDefault();
-                Label labelPriceActual = panpan.Controls.OfType<Label>().ElementAt(3);
+                Label labelPriceActual = bunbun.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPriceActual");
 
                 total += Convert.ToDouble(labelPriceActual.Text);
             }
 
             label9.Text = "Total: P" + total;
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
