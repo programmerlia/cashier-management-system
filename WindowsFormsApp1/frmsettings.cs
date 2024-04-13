@@ -173,7 +173,7 @@ namespace WindowsFormsApp1
             {
                 DB.Connect();
 
-                string queryy = "UPDATE tbltheme SET colorheader=@colorheader, colormainbutton=@colormainbutton, colorsecondarybutton=colorsecondarybutton WHERE ThemeID=@ID;";
+                string queryy = "UPDATE tbltheme SET colorheader=@colorheader, colormainbutton=@colormainbutton, colorsecondarybutton=@colorsecondarybutton WHERE ThemeID=@ID;";
 
                 Variables.clrheader = lblcol1.BackColor;
                 Variables.clrmainbtn = lblcol2.BackColor;
