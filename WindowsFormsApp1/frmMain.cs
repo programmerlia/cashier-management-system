@@ -10,9 +10,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Drawing.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace WindowsFormsApp1
@@ -24,33 +26,42 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID");
-
+            loadColors();
             flowLayoutPanel2.Controls.Clear();
             LoadCategories();
             if (Variables.MAINTYPE == "Admin")
             {
                 bttnsetting.Visible = true;
-            } else if (Variables.MAINTYPE=="User")
+                pclogo.Click += pclogo_Click;
+            } else if (Variables.MAINTYPE == "User")
             {
                 bttnsetting.Visible = false;
+                pclogo.Click += pclogo_Click;
             }
 
+
+        }
+
+        private void loadColors()
+        {
             DB.Connect();
             try
             {
-                
 
-                MySqlCommand msn = new MySqlCommand("SELECT * FROM tbltheme WHERE ThemeID = @ID", DB.con);
+
+                MySqlCommand msn = new MySqlCommand("SELECT * FROM tbltheme WHERE CompID = @ID", DB.con);
                 msn.Parameters.AddWithValue("@ID", Variables.MAINCOMPANYID);
 
                 MySqlDataReader reader = msn.ExecuteReader();
-                while (reader.Read()) {
+                while (reader.Read())
+                {
                     Variables.clrheader = System.Drawing.ColorTranslator.FromHtml(reader.GetString("colorheader"));
                     Variables.clrmainbtn = System.Drawing.ColorTranslator.FromHtml(reader.GetString("colormainbutton"));
                     Variables.clrsecondarybtn = System.Drawing.ColorTranslator.FromHtml(reader.GetString("colorsecondarybutton"));
 
                     Variables.setColors(Variables.clrheader, panel1);
-                    Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct);
+                    Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnlogout);
+                    Variables.setColorsBunifu(Variables.clrmainbtn, btnreceipt, btnaddproduct);
 
                 }
                 reader.Close();
@@ -66,7 +77,6 @@ namespace WindowsFormsApp1
                 DB.Disconnect();
             }
         }
-
         private void frmMain2_Activated(object sender, EventArgs e)
         {
             try
@@ -80,6 +90,7 @@ namespace WindowsFormsApp1
                 if (reader.Read())
                 {
                     label1.Text = reader.GetString("CompName");
+                    label2.Text = reader.GetString("CompName");
                     label3.Text = reader.GetString("CompAddr");
 
                     reader.Close();
@@ -116,8 +127,6 @@ namespace WindowsFormsApp1
         {
             try
             {
-                flowLayoutPanel1.Controls.Clear();
-
                 DB.Connect();
 
                 MySqlCommand msn = new MySqlCommand(cmd, DB.con);
@@ -125,9 +134,17 @@ namespace WindowsFormsApp1
                 msn.Parameters.AddWithValue("@ProdName", "%" + textBox1.Text + "%");
 
                 MySqlDataReader reader = msn.ExecuteReader();
+                if (!reader.HasRows)
+                {
+                    Label labelno = new Label { Text = "NO PRODUCTS FOUND", Font = new Font("Century Gothic", 20, FontStyle.Bold), Location = new Point(0, 0), TextAlign = ContentAlignment.MiddleCenter, Dock = DockStyle.Fill };
+                    flowLayoutPanel1.Controls.Add(labelno);
+                    btnreceipt.Visible = false;
+                }
 
                 if (reader.HasRows)
                 {
+                    btnreceipt.Visible = true;
+                    flowLayoutPanel1.Controls.Clear();
                     while (reader.Read())
                     {
                         BunifuCards bunifuCard = new BunifuCards { Size = new Size(150, 150), BorderRadius = 20, color = Variables.clrheader };
@@ -144,15 +161,15 @@ namespace WindowsFormsApp1
                         pictureBox.Left = (pictureBox.Parent.Width - pictureBox.Width) / 2;
 
 
-                  
 
 
-                        Label labelProdName = new Label { Text = reader.GetString("ProdName"), Font = new Font("Century Gothic", 10, FontStyle.Bold), Location = new Point(100,32), TextAlign = ContentAlignment.MiddleCenter };
+
+                        Label labelProdName = new Label { Text = reader.GetString("ProdName"), Font = new Font("Century Gothic", 10, FontStyle.Bold), Location = new Point(100, 32), TextAlign = ContentAlignment.MiddleCenter };
                         labelProdName.Name = "labelProdName";
                         bunifuCard.Controls.Add(labelProdName);
 
-                        labelProdName.Left=(labelProdName.Parent.Width-labelProdName.Width)/2;
-                        labelProdName.Top=labelProdName.Parent.Height-labelProdName.Height- 35;
+                        labelProdName.Left = (labelProdName.Parent.Width - labelProdName.Width) / 2;
+                        labelProdName.Top = labelProdName.Parent.Height - labelProdName.Height - 35;
 
 
                         Label labelPrice = new Label
@@ -185,7 +202,7 @@ namespace WindowsFormsApp1
 
 
 
-      
+
 
 
         private void btnsearch_Click(object sender, EventArgs e) => loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID AND ProdName LIKE @ProdName");
@@ -213,7 +230,6 @@ namespace WindowsFormsApp1
         {
             try
             {
-                pnlcategory.Controls.Clear();
 
                 DB.Connect();
 
@@ -223,26 +239,37 @@ namespace WindowsFormsApp1
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (!reader.HasRows)
                     {
-                        string categoryName = reader.GetString("CategoryName");
-                        int categoryId = reader.GetInt32("ID");
+                        Label labelno = new Label { Text = "No CATEGORIES FOUND", Font = new Font("Century Gothic", 12, FontStyle.Bold), Location = new Point(0, 0), TextAlign = ContentAlignment.MiddleCenter, Dock = DockStyle.Fill };
+                        pnlcategory.Controls.Add(labelno);
+                        btnviewallproducts.Visible = false;
+                    }
+                    if (reader.HasRows)
+                    {
+                        pnlcategory.Controls.Clear();
+                        btnviewallproducts.Visible = true;
+                        while (reader.Read())
+                        {
+                            string categoryName = reader.GetString("CategoryName");
+                            int categoryId = reader.GetInt32("ID");
 
-                        BunifuButton btnCategory = new BunifuButton();
-                        btnCategory.Dock = DockStyle.Top;
-                        btnCategory.Height = 55;
+                            BunifuButton btnCategory = new BunifuButton();
+                            btnCategory.Dock = DockStyle.Top;
+                            btnCategory.Height = 55;
 
-                        btnCategory.IdleBorderRadius = 10;
+                            btnCategory.IdleBorderRadius = 10;
 
-                        btnCategory.ForeColor = Color.White;
-                        btnCategory.Text = categoryName;
-                        btnCategory.Click += (sender, e) => BtnCategory_Click(sender, e, categoryId);
+                            btnCategory.ForeColor = Color.White;
+                            btnCategory.Text = categoryName;
+                            btnCategory.Click += (sender, e) => BtnCategory_Click(sender, e, categoryId);
 
-                        
 
-                        Variables.setColorsBunifu(Variables.clrmainbtn, btnCategory);
 
-                        pnlcategory.Controls.Add(btnCategory);
+                            Variables.setColorsBunifu(Variables.clrmainbtn, btnCategory);
+
+                            pnlcategory.Controls.Add(btnCategory);
+                        }
                     }
                 }
             }
@@ -266,7 +293,7 @@ namespace WindowsFormsApp1
         {
 
             Control lal = (Control)sender;
-            Control button = lal.Parent ;
+            Control button = lal.Parent;
             Label lbl2 = button.Controls.OfType<Label>().FirstOrDefault(b => b.Name == "labelProdName");
             Label lbl = button.Controls.OfType<Label>().FirstOrDefault(b => b.Name == "labelPrice");
 
@@ -279,26 +306,26 @@ namespace WindowsFormsApp1
             }
             else
             {
-             foreach (Control control in flowLayoutPanel2.Controls)
+                foreach (Control control in flowLayoutPanel2.Controls)
+                {
+                    foreach (Label l in control.Controls)
+                    {
+                        if (l.Text == lbl2.Text)
                         {
-                            foreach (Label l in control.Controls)
-                            {
-                                if (l.Text == lbl2.Text)
-                                {
-                                    BunifuButton buttonPlus = l.Parent.Controls.OfType<BunifuButton>().FirstOrDefault(b => b.Name == "buttonPlus");
-                                    buttonPlus.PerformClick();
+                            BunifuButton buttonPlus = l.Parent.Controls.OfType<BunifuButton>().FirstOrDefault(b => b.Name == "buttonPlus");
+                            buttonPlus.PerformClick();
                             alreadyExists = true;
-                                    break;
-                                }
+                            break;
+                        }
                         break;
-                            }
-               
+                    }
+
 
                 }
 
 
             }
-           
+
 
             if (!alreadyExists)
             {
@@ -319,7 +346,7 @@ namespace WindowsFormsApp1
             new frmsettings().Show();
         }
 
-        private void resetColors() 
+        private void resetColors()
         {
             Variables.setColors(Variables.clrheader, panel1);
             Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct, btnreceipt);
@@ -347,6 +374,12 @@ namespace WindowsFormsApp1
 
         private void btnreceipt_Click(object sender, EventArgs e)
         {
+            createReceiptPanel();
+            
+        }
+
+        private void createReceiptPanel()
+        {
             int count = 0;
 
             Variables.prodname.Clear();
@@ -372,7 +405,11 @@ namespace WindowsFormsApp1
                 count++;
             }
             new frmReceipt().ShowDialog();
+            new frmReceipt2().ShowDialog();
+
         }
+
+   
 
         private void btnlogout_Click(object sender, EventArgs e)
         {
@@ -604,6 +641,50 @@ namespace WindowsFormsApp1
 
 
             flowLayoutPanel2.Padding = new Padding(paddingleft, 0,0,0);
+        }
+
+        private void pclogo_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png, *.bmp)|*.jpg;*.jpeg;*.png;*.bmp";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pclogo.Image = System.Drawing.Image.FromFile(openFileDialog.FileName);
+                MemoryStream ms = new MemoryStream();
+                pclogo.Image.Save(ms, pclogo.Image.RawFormat);
+                try
+                {
+                    DB.Connect();
+
+                    string query = "UPDATE tblcompany SET CompImg=@1 WHERE CompID=@2);";
+
+                    using (MySqlConnection connection = DB.con)
+                    {
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@2", Variables.MAINCOMPANYID);
+                            command.Parameters.AddWithValue("@1", Shit.ImageToBlob(pclogo.Image)); 
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    AMB.GetInstance().Show("LOGO CHANGED SUCCESFULY", 1500);
+
+                }
+                catch (Exception ex)
+                {
+                    AMB.GetInstance().Show(ex.Message, 1500); //pag may error para makita ko ano error
+                }
+                finally
+                {
+                    DB.Disconnect();
+                }
+
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -40,6 +40,7 @@ namespace WindowsFormsApp1
                     return;
                 }
 
+                //this is for getting the colors in the database
 
                 string username = tbusername.Text;
                 string password = tbpassword.Text;

@@ -74,6 +74,8 @@
             this.btncancel = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.btnok = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.tblreceipt = new Bunifu.UI.WinForms.BunifuDataGridView();
+            this.Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.bttninsert = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
@@ -85,8 +87,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -119,7 +119,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 20, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(990, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(736, 66);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // bttntheme
@@ -409,7 +409,7 @@
             this.bunifuButton1.AutoSizeLeftIcon = true;
             this.bunifuButton1.AutoSizeRightIcon = true;
             this.bunifuButton1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuButton1.BackColor1 = System.Drawing.SystemColors.ActiveCaption;
+            this.bunifuButton1.BackColor1 = System.Drawing.Color.DarkGray;
             this.bunifuButton1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuButton1.BackgroundImage")));
             this.bunifuButton1.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.bunifuButton1.ButtonText = "BACK";
@@ -441,7 +441,7 @@
             this.bunifuButton1.IdleBorderColor = System.Drawing.Color.Transparent;
             this.bunifuButton1.IdleBorderRadius = 10;
             this.bunifuButton1.IdleBorderThickness = 1;
-            this.bunifuButton1.IdleFillColor = System.Drawing.SystemColors.ActiveCaption;
+            this.bunifuButton1.IdleFillColor = System.Drawing.Color.DarkGray;
             this.bunifuButton1.IdleIconLeftImage = null;
             this.bunifuButton1.IdleIconRightImage = null;
             this.bunifuButton1.IndicateFocus = false;
@@ -469,7 +469,7 @@
             this.bunifuButton1.OnIdleState.BorderRadius = 10;
             this.bunifuButton1.OnIdleState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.bunifuButton1.OnIdleState.BorderThickness = 1;
-            this.bunifuButton1.OnIdleState.FillColor = System.Drawing.SystemColors.ActiveCaption;
+            this.bunifuButton1.OnIdleState.FillColor = System.Drawing.Color.DarkGray;
             this.bunifuButton1.OnIdleState.ForeColor = System.Drawing.Color.White;
             this.bunifuButton1.OnIdleState.IconLeftImage = null;
             this.bunifuButton1.OnIdleState.IconRightImage = null;
@@ -497,10 +497,10 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(990, 648);
+            this.tabControl1.Size = new System.Drawing.Size(736, 428);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -517,7 +517,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(982, 622);
+            this.tabPage1.Size = new System.Drawing.Size(728, 402);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -681,7 +681,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(982, 622);
+            this.tabPage2.Size = new System.Drawing.Size(728, 402);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -694,7 +694,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 38);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(30, 20, 30, 20);
-            this.panel2.Size = new System.Drawing.Size(982, 584);
+            this.panel2.Size = new System.Drawing.Size(728, 364);
             this.panel2.TabIndex = 1;
             // 
             // panel3
@@ -708,7 +708,7 @@
             this.panel3.Controls.Add(this.bunifuPanel1);
             this.panel3.Controls.Add(this.btncancel);
             this.panel3.Controls.Add(this.btnok);
-            this.panel3.Location = new System.Drawing.Point(674, 20);
+            this.panel3.Location = new System.Drawing.Point(420, 20);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(278, 261);
             this.panel3.TabIndex = 1;
@@ -1124,7 +1124,7 @@
             this.tblreceipt.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.tblreceipt.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(115)))), ((int)(((byte)(204)))));
@@ -1142,7 +1142,7 @@
             this.tblreceipt.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.tblreceipt.CurrentTheme.BackColor = System.Drawing.Color.White;
             this.tblreceipt.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            this.tblreceipt.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.DodgerBlue;
+            this.tblreceipt.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.FloralWhite;
             this.tblreceipt.CurrentTheme.HeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             this.tblreceipt.CurrentTheme.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.tblreceipt.CurrentTheme.HeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(115)))), ((int)(((byte)(204)))));
@@ -1164,7 +1164,7 @@
             this.tblreceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblreceipt.EnableHeadersVisualStyles = false;
             this.tblreceipt.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            this.tblreceipt.HeaderBackColor = System.Drawing.Color.DodgerBlue;
+            this.tblreceipt.HeaderBackColor = System.Drawing.Color.FloralWhite;
             this.tblreceipt.HeaderBgColor = System.Drawing.Color.Empty;
             this.tblreceipt.HeaderForeColor = System.Drawing.Color.White;
             this.tblreceipt.Location = new System.Drawing.Point(30, 20);
@@ -1173,10 +1173,22 @@
             this.tblreceipt.RowHeadersVisible = false;
             this.tblreceipt.RowTemplate.Height = 40;
             this.tblreceipt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tblreceipt.Size = new System.Drawing.Size(922, 544);
+            this.tblreceipt.Size = new System.Drawing.Size(668, 324);
             this.tblreceipt.TabIndex = 0;
             this.tblreceipt.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
             this.tblreceipt.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.tblreceipt_UserDeletedRow);
+            // 
+            // Details
+            // 
+            this.Details.HeaderText = "Details";
+            this.Details.Name = "Details";
+            this.Details.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
             // 
             // panel1
             // 
@@ -1184,7 +1196,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(982, 38);
+            this.panel1.Size = new System.Drawing.Size(728, 38);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -1198,7 +1210,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(982, 38);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(728, 38);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // bttninsert
@@ -1206,7 +1218,6 @@
             this.bttninsert.AllowAnimations = true;
             this.bttninsert.AllowMouseEffects = true;
             this.bttninsert.AllowToggling = false;
-            this.bttninsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bttninsert.AnimationSpeed = 200;
             this.bttninsert.AutoGenerateColors = false;
             this.bttninsert.AutoRoundBorders = false;
@@ -1230,6 +1241,7 @@
             this.bttninsert.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bttninsert.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.bttninsert.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.bttninsert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bttninsert.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
             this.bttninsert.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.bttninsert.ForeColor = System.Drawing.Color.White;
@@ -1249,10 +1261,8 @@
             this.bttninsert.IdleIconLeftImage = null;
             this.bttninsert.IdleIconRightImage = null;
             this.bttninsert.IndicateFocus = false;
-            this.bttninsert.Location = new System.Drawing.Point(782, 3);
+            this.bttninsert.Location = new System.Drawing.Point(519, 3);
             this.bttninsert.Margin = new System.Windows.Forms.Padding(10, 3, 30, 3);
-            this.bttninsert.MaximumSize = new System.Drawing.Size(170, 30);
-            this.bttninsert.MinimumSize = new System.Drawing.Size(130, 30);
             this.bttninsert.Name = "bttninsert";
             this.bttninsert.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bttninsert.OnDisabledState.BorderRadius = 10;
@@ -1286,7 +1296,7 @@
             this.bttninsert.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.bttninsert.OnPressedState.IconLeftImage = null;
             this.bttninsert.OnPressedState.IconRightImage = null;
-            this.bttninsert.Size = new System.Drawing.Size(170, 30);
+            this.bttninsert.Size = new System.Drawing.Size(179, 32);
             this.bttninsert.TabIndex = 33;
             this.bttninsert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bttninsert.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1301,7 +1311,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(982, 622);
+            this.tabPage3.Size = new System.Drawing.Size(728, 402);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1325,8 +1335,8 @@
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(70, 30, 70, 30);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer1.Size = new System.Drawing.Size(982, 622);
-            this.splitContainer1.SplitterDistance = 61;
+            this.splitContainer1.Size = new System.Drawing.Size(728, 402);
+            this.splitContainer1.SplitterDistance = 39;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -1337,7 +1347,7 @@
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(982, 61);
+            this.label2.Size = new System.Drawing.Size(728, 39);
             this.label2.TabIndex = 0;
             this.label2.Text = "ACCESS REQUESTS";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1349,7 +1359,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(70, 30);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(842, 498);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(588, 300);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // panel5
@@ -1360,7 +1370,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(990, 748);
+            this.panel5.Size = new System.Drawing.Size(736, 494);
             this.panel5.TabIndex = 1;
             // 
             // panel7
@@ -1368,9 +1378,9 @@
             this.panel7.AutoSize = true;
             this.panel7.Controls.Add(this.tabControl1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(0, 100);
+            this.panel7.Location = new System.Drawing.Point(0, 66);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(990, 648);
+            this.panel7.Size = new System.Drawing.Size(736, 428);
             this.panel7.TabIndex = 1;
             // 
             // panel6
@@ -1379,28 +1389,16 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(990, 100);
+            this.panel6.Size = new System.Drawing.Size(736, 66);
             this.panel6.TabIndex = 0;
-            // 
-            // Details
-            // 
-            this.Details.HeaderText = "Details";
-            this.Details.Name = "Details";
-            this.Details.ReadOnly = true;
-            // 
-            // Amount
-            // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
             // 
             // frmsettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 748);
+            this.ClientSize = new System.Drawing.Size(736, 494);
             this.Controls.Add(this.panel5);
-            this.MinimumSize = new System.Drawing.Size(752, 500);
+            this.MinimumSize = new System.Drawing.Size(752, 532);
             this.Name = "frmsettings";
             this.Text = "frmsettings";
             this.flowLayoutPanel1.ResumeLayout(false);

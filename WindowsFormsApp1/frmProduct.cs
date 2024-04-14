@@ -24,9 +24,11 @@ namespace WindowsFormsApp1
             getDropdownItems();
             panel1.Hide();
 
-            Variables.setColors(Variables.clrheader, this);
+            Variables.setColors(Variables.clrheader, this, panel1);
             Variables.setColorsBunifu(Variables.clrmainbtn, btnUpload, bunifuButton1, bunifuButton2);
-            bunifuButton2.IdleFillColor = SystemColors.ControlLight;
+            linkLabel1.BackColor = Variables.clrheader;
+            linkLabel2.BackColor = Variables.clrheader;
+            linkLabel3.BackColor = Variables.clrheader;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -176,7 +178,8 @@ namespace WindowsFormsApp1
 
             catch (Exception ex)
             {
-                AMB.GetInstance().Show(ex.Message, 1500); 
+
+                Console.WriteLine(ex);             
             }
             finally
             {

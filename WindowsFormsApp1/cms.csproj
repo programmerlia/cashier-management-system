@@ -234,6 +234,12 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReceipt2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceipt2.Designer.cs">
+      <DependentUpon>frmReceipt2.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmsettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceipt.resx">
       <DependentUpon>frmReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceipt2.resx">
+      <DependentUpon>frmReceipt2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmsettings.resx">
       <DependentUpon>frmsettings.cs</DependentUpon>

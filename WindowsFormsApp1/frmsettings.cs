@@ -31,6 +31,13 @@ namespace WindowsFormsApp1
             InitializeComponent();
             resetColors();
             panel3.Hide();
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            foreach (TabPage tabPage in tabControl1.TabPages)
+            {
+                tabPage.Padding = new Padding(0);
+                tabPage.Margin = new Padding(-4);
+                tabPage.Height = 1;
+            }
 
             try
             {
@@ -162,9 +169,10 @@ namespace WindowsFormsApp1
         private void resetColors()
         {
             Variables.setColors(Variables.clrheader, lblcol1);
-            Variables.setColorsBunifu(Variables.clrmainbtn, bttntheme, bttnreceipt, bttnaccess);
+            Variables.setColorsBunifu(Variables.clrmainbtn, bttntheme, bttnreceipt, bttnaccess, bunifuButton1);
             Variables.setColors(Variables.clrmainbtn, lblcol2);
-            Variables.setColors(Variables.clrsecondarybtn, lblcol3);
+            Variables.setColors(Variables.clrsecondarybtn, lblcol3, bttninsert, btncancel, btnok);
+            tblreceipt.HeaderBackColor = Variables.clrheader;
         }
 
         private void bttnapply_Click(object sender, EventArgs e)
