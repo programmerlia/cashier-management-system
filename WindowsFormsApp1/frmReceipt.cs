@@ -28,8 +28,11 @@ namespace WindowsFormsApp1
             label2.Left = (splitContainer1.Width - label2.Width) / 2;
             label3.Left = (splitContainer1.Width - label3.Width) / 2;
             label4.Left = (splitContainer1.Width - label4.Width) / 2;
+            label7.Left = (splitContainer1.Width - label4.Width) / 2;
 
             splitContainer1.Left = (this.ClientSize.Width - splitContainer1.Width) / 2;
+            label5.Left = splitContainer1.Width - label5.Width - 10;
+            label6.Left=(splitContainer1.Width - label6.Width) / 2;
 
             retrieveValues();
             retrieveReceiptValues();
@@ -94,6 +97,8 @@ namespace WindowsFormsApp1
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
+                    int rowheight = 0;
+                    int rowcount = 0;
                     if (reader.HasRows)
                     {
                         while (reader.Read())
@@ -134,9 +139,13 @@ namespace WindowsFormsApp1
                             recpan.Controls.Add(labelRecValue);
                             labelRecValue.Left = labelRecValue.Parent.Width - labelRecValue.Width;
                             labelRecValue.Top = 0;
+
+                            rowheight = recpan.Height;
+                            rowcount++;
                         }
                     }
-                    
+                    flowLayoutPanel2.Height = rowheight * rowcount;
+                    label6.Top = flowLayoutPanel2.Top + flowLayoutPanel2.Height;
                 }
                 label6.Text = "Amount Due: P" + amountdue.ToString();
             }
