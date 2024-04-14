@@ -80,6 +80,8 @@ namespace WindowsFormsApp1
         public static List<double> prodquant = new List<double>();
         public static List<double> prodprice = new List<double>();
         public static List<double> prodqp = new List<double>();
+
+        public static double total = 0;
     }
 }
 

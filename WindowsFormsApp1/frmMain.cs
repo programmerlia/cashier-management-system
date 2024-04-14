@@ -322,20 +322,21 @@ namespace WindowsFormsApp1
         private void resetColors() 
         {
             Variables.setColors(Variables.clrheader, panel1);
-            Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct);
+            Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct, btnreceipt);
             LoadCategories();
             btnviewallproducts.OnPressedState.FillColor = Color.Black;
-            foreach (var bunbun in flowLayoutPanel2.Controls.OfType<BunifuCards>())
+            if (!(flowLayoutPanel2.Controls.OfType<Panel>().FirstOrDefault() == null))
             {
+                foreach (Control panpan in flowLayoutPanel2.Controls)
+                {
+                    Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault();
+                    foreach (var button in panpan.Controls.OfType<BunifuButton>())
+                    {
+                        Variables.setColorsBunifuSecond(Variables.clrsecondarybtn, button);
+                    }
 
-                Panel panpan = bunbun.Controls.OfType<Panel>().FirstOrDefault();
-                Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault();
-                Panel quantpan = panpan.Controls.OfType<Panel>().FirstOrDefault();
-                foreach (var button in quantpan.Controls.OfType<BunifuButton>()) {
-                    Variables.setColorsBunifuSecond(Variables.clrsecondarybtn, button);
-;                }
 
-
+                }
             }
         }
 
@@ -365,6 +366,8 @@ namespace WindowsFormsApp1
                 Variables.prodquant.Add(Convert.ToDouble(labelQuantity.Text));
                 Variables.prodprice.Add(Convert.ToDouble(labelPrice.Text));
                 Variables.prodqp.Add(Convert.ToDouble(labelPriceActual.Text));
+
+                Variables.total = total;
 
                 count++;
             }
@@ -568,9 +571,9 @@ namespace WindowsFormsApp1
 
         private void updateTotal() {
             total = 0;
-            foreach (Control bunbun in flowLayoutPanel2.Controls.OfType<Panel>())
+            foreach (Control panpan in flowLayoutPanel2.Controls.OfType<Panel>())
             {
-                Label labelPriceActual = bunbun.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPriceActual");
+                Label labelPriceActual = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPriceActual");
 
                 total += Convert.ToDouble(labelPriceActual.Text);
             }
@@ -586,6 +589,21 @@ namespace WindowsFormsApp1
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void panel10_Resize(object sender, EventArgs e)
+        {
+            int paddingleft = 0;
+
+            if (!(flowLayoutPanel2.Controls.OfType<Panel>().FirstOrDefault()==null))
+            {
+                Control panpan = flowLayoutPanel2.Controls.OfType<Panel>().FirstOrDefault();
+
+                paddingleft = (flowLayoutPanel2.Width - panpan.Width) / 2;
+            }
+
+
+            flowLayoutPanel2.Padding = new Padding(paddingleft, 0,0,0);
         }
     }
 }
