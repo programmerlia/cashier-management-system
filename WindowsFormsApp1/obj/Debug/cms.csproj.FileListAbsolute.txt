@@ -134,4 +134,3 @@ C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\cms.csproj.CopyComplete
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmReceipt2.resources

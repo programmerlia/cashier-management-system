@@ -405,7 +405,6 @@ namespace WindowsFormsApp1
                 count++;
             }
             new frmReceipt().ShowDialog();
-            new frmReceipt2().ShowDialog();
 
         }
 
