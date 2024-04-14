@@ -322,18 +322,21 @@ namespace WindowsFormsApp1
         private void resetColors() 
         {
             Variables.setColors(Variables.clrheader, panel1);
-            Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct);
+            Variables.setColorsBunifu(Variables.clrmainbtn, btnviewallproducts, btnsearch, btnaddproduct, btnreceipt);
             LoadCategories();
             btnviewallproducts.OnPressedState.FillColor = Color.Black;
-            foreach (Control panpan in flowLayoutPanel2.Controls)
+            if (!(flowLayoutPanel2.Controls.OfType<Panel>().FirstOrDefault() == null))
             {
-                Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault();
-                Panel quantpan = panpan.Controls.OfType<Panel>().FirstOrDefault();
-                foreach (var button in quantpan.Controls.OfType<BunifuButton>()) {
-                    Variables.setColorsBunifuSecond(Variables.clrsecondarybtn, button);
-;                }
+                foreach (Control panpan in flowLayoutPanel2.Controls)
+                {
+                    Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault();
+                    foreach (var button in panpan.Controls.OfType<BunifuButton>())
+                    {
+                        Variables.setColorsBunifuSecond(Variables.clrsecondarybtn, button);
+                    }
 
 
+                }
             }
         }
 
@@ -363,6 +366,8 @@ namespace WindowsFormsApp1
                 Variables.prodquant.Add(Convert.ToDouble(labelQuantity.Text));
                 Variables.prodprice.Add(Convert.ToDouble(labelPrice.Text));
                 Variables.prodqp.Add(Convert.ToDouble(labelPriceActual.Text));
+
+                Variables.total = total;
 
                 count++;
             }

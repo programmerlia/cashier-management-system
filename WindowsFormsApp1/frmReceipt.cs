@@ -1,4 +1,6 @@
 ﻿using Bunifu.Framework.UI;
+using Bunifu.UI.WinForms.BunifuButton;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +16,7 @@ namespace WindowsFormsApp1
 {
     public partial class frmReceipt : Form
     {
+        public double amountdue = Variables.total;
         public frmReceipt()
         {
             InitializeComponent();
@@ -28,7 +31,8 @@ namespace WindowsFormsApp1
 
             splitContainer1.Left = (this.ClientSize.Width - splitContainer1.Width) / 2;
 
-            retrieveArrValues();
+            retrieveValues();
+            retrieveReceiptValues();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -42,7 +46,7 @@ namespace WindowsFormsApp1
             splitContainer1.Left = (this.ClientSize.Width - splitContainer1.Width) / 2;
         }
 
-        private void retrieveArrValues()
+        private void retrieveValues()
         {
             for (int i=0; i<Variables.prodname.Count; i++) {
 
@@ -74,6 +78,75 @@ namespace WindowsFormsApp1
                 panpan.Controls.Add(labelTotalPrice);
                 labelTotalPrice.Left=labelTotalPrice.Parent.Width-labelTotalPrice.Width;
                 labelTotalPrice.Top = 0;
+            }
+            label5.Text = "Total: P"+Variables.total.ToString();
+        }
+
+        private void retrieveReceiptValues()
+        {
+            try
+            {
+                DB.Connect();
+
+                string query = "SELECT * FROM tblreceipt WHERE CompID = @CompID";
+                MySqlCommand command = new MySqlCommand(query, DB.con);
+                command.Parameters.AddWithValue("@CompID", Variables.MAINCOMPANYID);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Panel recpan = new Panel { Width = 50, Height = 50, Location = new Point(10, 10), Dock = DockStyle.Top, Margin = new Padding(0, 0, 0, 0), Padding = new Padding(0, 0, 0, 0)};
+
+                            flowLayoutPanel2.Controls.Add(recpan);
+                            recpan.Width = recpan.Parent.Width;
+
+
+                            Label labelRecName = new Label { Text = reader.GetString("RecName"), TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Century Gothic", 10), ForeColor = Color.Black, Location = new Point(1, 7), AutoSize = true };
+                            labelRecName.Name = "labelRecName";
+                            recpan.Controls.Add(labelRecName);
+                            labelRecName.Top = 0;
+
+                            recpan.Height=labelRecName.Height;
+
+                            string rectype=reader.GetString("RecType");
+                            string reciord = reader.GetString("RecIorD");
+                            double recamount = Convert.ToDouble(reader.GetString("RecAmount"));
+
+                            if (rectype == "P") {
+                                recamount = (recamount/100)*Variables.total;
+                            } else if (rectype=="N") 
+                            {
+                            }
+
+                            if (reciord=="D")
+                            {
+                                amountdue -= recamount;
+                            } else if(reciord == "I")
+                            {
+                                amountdue += recamount;
+                            }
+
+                            Label labelRecValue = new Label { Text = "P"+recamount.ToString(), TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Century Gothic", 10), ForeColor = Color.Black, Location = new Point(1, 7), AutoSize = true };
+                            labelRecValue.Name = "labelRecValue";
+                            recpan.Controls.Add(labelRecValue);
+                            labelRecValue.Left = labelRecValue.Parent.Width - labelRecValue.Width;
+                            labelRecValue.Top = 0;
+                        }
+                    }
+                    
+                }
+                label6.Text = "Amount Due: P" + amountdue.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                DB.Disconnect();
             }
         }
     }
