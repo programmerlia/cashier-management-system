@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Linq.Expressions;
 
 namespace WindowsFormsApp1
 {
@@ -40,7 +41,9 @@ namespace WindowsFormsApp1
             }
 
 
+
         }
+
 
         private void loadColors()
         {
@@ -90,7 +93,7 @@ namespace WindowsFormsApp1
                 if (reader.Read())
                 {
                     label1.Text = reader.GetString("CompName");
-                    label2.Text = reader.GetString("CompName");
+                    label2.Text = reader.GetInt32("CompBID").ToString();
                     label3.Text = reader.GetString("CompAddr");
 
                     reader.Close();
@@ -136,7 +139,8 @@ namespace WindowsFormsApp1
                 MySqlDataReader reader = msn.ExecuteReader();
                 if (!reader.HasRows)
                 {
-                    Label labelno = new Label { Text = "NO PRODUCTS FOUND", Font = new Font("Century Gothic", 20, FontStyle.Bold), Location = new Point(0, 0), TextAlign = ContentAlignment.MiddleCenter, Dock = DockStyle.Fill };
+                    Label labelno = new Label { Text = "NO PRODUCTS FOUND", Font = new Font("Century Gothic", 20, FontStyle.Bold), Location = new Point(0, 0), TextAlign = ContentAlignment.MiddleCenter};
+                    labelno.Size = flowLayoutPanel1.Size;
                     flowLayoutPanel1.Controls.Add(labelno);
                     btnreceipt.Visible = false;
                 }
@@ -161,28 +165,37 @@ namespace WindowsFormsApp1
                         pictureBox.Left = (pictureBox.Parent.Width - pictureBox.Width) / 2;
 
 
-
-
-
-                        Label labelProdName = new Label { Text = reader.GetString("ProdName"), Font = new Font("Century Gothic", 10, FontStyle.Bold), Location = new Point(100, 32), TextAlign = ContentAlignment.MiddleCenter };
-                        labelProdName.Name = "labelProdName";
+                        Label labelProdName = new Label
+                        {
+                            Text = reader.GetString("ProdName"),
+                            Font = new Font("Century Gothic", 9, FontStyle.Bold),
+                            Location = new Point(0, 90),
+                            TextAlign = ContentAlignment.MiddleCenter,
+                            Padding = new Padding(2, 0, 2, 0),
+                            Name = "labelProdName",
+                            Width = bunifuCard.Width,
+                           
+                        };
+                        Size size = TextRenderer.MeasureText(labelProdName.Text, labelProdName.Font, new Size(labelProdName.Width, int.MaxValue), TextFormatFlags.WordBreak);
+                        labelProdName.Height = size.Height;
                         bunifuCard.Controls.Add(labelProdName);
 
-                        labelProdName.Left = (labelProdName.Parent.Width - labelProdName.Width) / 2;
-                        labelProdName.Top = labelProdName.Parent.Height - labelProdName.Height - 35;
 
 
                         Label labelPrice = new Label
                         {
                             Text = reader.GetDouble("Price").ToString(),
-                            Font = new Font("Century Gothic", 9, FontStyle.Bold),
-                            Location = new Point(120, 20),
-                            TextAlign = ContentAlignment.MiddleCenter,
-                            Name = "labelPrice"
+                            Font = new Font("Century Gothic", 8),
+                            Location = new Point(labelProdName.Location.X, labelProdName.Location.Y + labelProdName.Height + 5),
+                        TextAlign = ContentAlignment.MiddleCenter,
+                            Name = "labelPrice",
+                            Padding = new Padding(2, 0, 2, 0),
+                            Width = bunifuCard.Width
                         };
+                        Size size2 = TextRenderer.MeasureText(labelPrice.Text, labelPrice.Font, new Size(labelPrice.Width, int.MaxValue), TextFormatFlags.WordBreak);
+                        
+                        labelPrice.Height = size2.Height;
                         bunifuCard.Controls.Add(labelPrice);
-                        labelPrice.Left = (labelPrice.Parent.Width - labelPrice.Width) / 2;
-                        labelPrice.Top = labelPrice.Parent.Height - labelPrice.Height - 17;
 
 
 
@@ -225,6 +238,8 @@ namespace WindowsFormsApp1
         {
 
         }
+
+       
 
         private void LoadCategories()
         {
@@ -376,20 +391,50 @@ namespace WindowsFormsApp1
         {
             createReceiptPanel();
             
+            
         }
 
         private void createReceiptPanel()
         {
-            int count = 0;
 
+            int count = 0;
+            int idofinserted=0;
+            string tableName = $"tblhistory_{Extensions.cleanString(Variables.MAINCOMPANYNAME)}";
             Variables.prodname.Clear();
             Variables.prodquant.Clear();
             Variables.prodprice.Clear();
             Variables.prodqp.Clear();
 
+            try
+            {
+                DB.Connect();
+
+                
+                string query = $"INSERT INTO {tableName} (Name, AccID) VALUES (@1, @2);";
+
+                using (MySqlConnection connection = DB.con)
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@1", Variables.MAINNAME);
+                        command.Parameters.AddWithValue("@2", Variables.MAINID);
+                        command.ExecuteNonQuery();
+                        idofinserted = Convert.ToInt32(command.LastInsertedId);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                DB.Disconnect();
+            }
+
             foreach (var panpan in flowLayoutPanel2.Controls.OfType<Panel>())
             {
-
                 Label labelName = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelName");
                 Label labelQuantity = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelQuantity");
                 Label labelPrice = panpan.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "labelPrice");
@@ -402,9 +447,41 @@ namespace WindowsFormsApp1
 
                 Variables.total = total;
 
+                string tblcol = Extensions.cleanString(labelName.Text.ToString());
+                int tblval = Int32.Parse(labelQuantity.Text.ToString());
+
+                try
+                {
+                    DB.Connect();
+
+                    string query = $"UPDATE {tableName} SET {tblcol} = @2 WHERE ID = @3;";
+
+                    using (MySqlConnection connection = DB.con)
+                    {
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@2", tblval);
+                            command.Parameters.AddWithValue("@3", idofinserted);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    DB.Disconnect();
+                }
+
                 count++;
             }
-            new frmReceipt().ShowDialog();
+            var receiptForm = new frmReceipt();
+            receiptForm.FormClosed += (sender, e) => {
+                flowLayoutPanel2.Controls.Clear();
+            };
+            receiptForm.ShowDialog();
 
         }
 
@@ -432,17 +509,27 @@ namespace WindowsFormsApp1
         {
 
             Panel panpan = new Panel {
-                Width = 315,
-                Height = 50,
+                AutoSize = true,
+                MaximumSize = new Size(315, 0),
+                MinimumSize = new Size(315, 0),
                 BackColor = Variables.clrheader,
                  Location = new Point(0,0 ),
+                 Padding = new Padding(0,5,0,5),
                 Anchor = AnchorStyles.Top| AnchorStyles.Left | AnchorStyles.Right
 
             };
             flowLayoutPanel2.Controls.Add(panpan);
 
 
-            Label labelName = new Label { Text = n, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Location = new Point(11, 7), Size = new Size(155, 37) };
+            Label labelName = new Label { 
+                Text = n, 
+                TextAlign = ContentAlignment.MiddleLeft, 
+                Font = new Font("Century Gothic", 10), 
+                ForeColor = Color.White, 
+                Location = new Point(11, 0), 
+                AutoSize = true,
+                MaximumSize = new Size(155, 0)
+            };
             labelName.Name = "labelName";
             panpan.Controls.Add(labelName);
 
@@ -455,8 +542,8 @@ namespace WindowsFormsApp1
                 Font = new Font("Century Gothic", 12),
                 ForeColor = Color.White,
                 BackColor = Color.Transparent,
-                Location = new Point(203,7), 
-                Size = new Size(17, 37),
+                Location = new Point(203,0), 
+                Size = new Size(17, panpan.Height),
                 Anchor = AnchorStyles.Right
             };
             labelQuantity.Name = "labelQuantity";
@@ -472,7 +559,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 IdleFillColor = Variables.clrsecondarybtn,
                 ForeColor = Color.White,
-                Location = new Point(173, 13),
+                Location = new Point(173, (panpan.Height - 20) / 2),
                 Cursor = Cursors.Hand,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Anchor = AnchorStyles.Right
@@ -491,7 +578,7 @@ namespace WindowsFormsApp1
                 IdleFillColor = Variables.clrsecondarybtn, 
                 ForeColor = Color.White, Cursor = Cursors.Hand, 
                 TextAlign = ContentAlignment.MiddleCenter, 
-                Location = new Point(222, 18),
+                Location = new Point(222, (panpan.Height - 20) / 2),
                 Anchor = AnchorStyles.Right
             
             };
@@ -499,6 +586,7 @@ namespace WindowsFormsApp1
             buttonPlus.Click += button2_Click;
             panpan.Controls.Add(buttonPlus);
 
+            labelName.Location = new Point(10, ((panpan.Height - labelName.Height) / 2)+3);
 
 
             Label labelPrice = new Label { Text = p, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Anchor=AnchorStyles.Right,
@@ -509,11 +597,11 @@ namespace WindowsFormsApp1
 
             //label na mag-didisplay nung price as P00.00 na format and the only one visible
             Label labelPriceNew = new Label { Text = "P"+p, 
-                TextAlign = ContentAlignment.MiddleCenter, 
+                TextAlign = ContentAlignment.MiddleRight, 
                 Font = new Font("Century Gothic", 10), 
                 ForeColor = Color.White, 
-                Location = new Point(266, 7), 
-                Size = new Size(45, 37),
+                Location = new Point(250, 0),
+                Size = new Size(55, panpan.Height),
                 Anchor = AnchorStyles.Right
             };
             labelPriceNew.Name = "labelPriceNew";
@@ -683,7 +771,24 @@ namespace WindowsFormsApp1
 
         private void label4_Click(object sender, EventArgs e)
         {
+            new frmhistory().ShowDialog();
+        }
 
+        private void label4_DoubleClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label4_MouseHover(object sender, EventArgs e)
+        {
+            label4.BackColor = Variables.clrsecondarybtn;
+            label4.ForeColor = Color.White;
+        }
+
+        private void label4_MouseLeave(object sender, EventArgs e)
+        {
+            label4.BackColor = Color.Transparent;
+            label4.ForeColor = Color.Black;
         }
     }
 }

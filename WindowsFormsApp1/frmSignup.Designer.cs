@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSignup));
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges4 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -40,6 +40,7 @@
             this.btnSignup = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.btnClear = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,9 +92,9 @@
             // 
             this.bunifuDropdown1.BackColor = System.Drawing.Color.Transparent;
             this.bunifuDropdown1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
-            this.bunifuDropdown1.BorderColor = System.Drawing.Color.Silver;
-            this.bunifuDropdown1.BorderRadius = 1;
-            this.bunifuDropdown1.Color = System.Drawing.Color.Silver;
+            this.bunifuDropdown1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
+            this.bunifuDropdown1.BorderRadius = 0;
+            this.bunifuDropdown1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
             this.bunifuDropdown1.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
             this.bunifuDropdown1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuDropdown1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -115,7 +116,7 @@
             this.bunifuDropdown1.IndicatorColor = System.Drawing.Color.Gray;
             this.bunifuDropdown1.IndicatorLocation = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
             this.bunifuDropdown1.ItemBackColor = System.Drawing.Color.White;
-            this.bunifuDropdown1.ItemBorderColor = System.Drawing.Color.White;
+            this.bunifuDropdown1.ItemBorderColor = System.Drawing.Color.Transparent;
             this.bunifuDropdown1.ItemForeColor = System.Drawing.Color.Black;
             this.bunifuDropdown1.ItemHeight = 18;
             this.bunifuDropdown1.ItemHighLightColor = System.Drawing.Color.DodgerBlue;
@@ -163,11 +164,11 @@
             this.btnSignup.ColorContrastOnClick = 45;
             this.btnSignup.ColorContrastOnHover = 45;
             this.btnSignup.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges1.BottomLeft = true;
-            borderEdges1.BottomRight = true;
-            borderEdges1.TopLeft = true;
-            borderEdges1.TopRight = true;
-            this.btnSignup.CustomizableEdges = borderEdges1;
+            borderEdges3.BottomLeft = true;
+            borderEdges3.BottomRight = true;
+            borderEdges3.TopLeft = true;
+            borderEdges3.TopRight = true;
+            this.btnSignup.CustomizableEdges = borderEdges3;
             this.btnSignup.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnSignup.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnSignup.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -253,11 +254,11 @@
             this.btnClear.ColorContrastOnClick = 45;
             this.btnClear.ColorContrastOnHover = 45;
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges2.BottomLeft = true;
-            borderEdges2.BottomRight = true;
-            borderEdges2.TopLeft = true;
-            borderEdges2.TopRight = true;
-            this.btnClear.CustomizableEdges = borderEdges2;
+            borderEdges4.BottomLeft = true;
+            borderEdges4.BottomRight = true;
+            borderEdges4.TopLeft = true;
+            borderEdges4.TopRight = true;
+            this.btnClear.CustomizableEdges = borderEdges4;
             this.btnClear.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnClear.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnClear.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -334,11 +335,25 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
+            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(731, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 17);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "X";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // frmSignup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(760, 496);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.bunifuDropdown1);
             this.Controls.Add(this.textBox4);
@@ -369,5 +384,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private Bunifu.UI.WinForms.BunifuDropdown bunifuDropdown1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label1;
     }
 }

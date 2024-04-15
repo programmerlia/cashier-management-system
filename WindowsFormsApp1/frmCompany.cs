@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace WindowsFormsApp1
 {
@@ -77,6 +78,7 @@ namespace WindowsFormsApp1
                             command.Parameters.AddWithValue("@CompType", textBox4.Text);
                             command.Parameters.AddWithValue("@CompImg", Shit.ImageToBlob(pictureBox1.Image)); //basta yung func return sya ng blob, img as parameters
                             command.ExecuteNonQuery();
+                            sql.addHistTbl(textBox2.Text.ToString());
                         }
                     }
                     AMB.GetInstance().Show("Created successfully.", 1500);

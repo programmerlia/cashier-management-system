@@ -171,6 +171,7 @@ namespace WindowsFormsApp1
                         command.ExecuteNonQuery();
                     }
                 }
+                sql.addHistTblProd(textBox1.Text.ToString());
                 AMB.GetInstance().Show("Item Added.", 1500);
                 this.Hide();
                     allClear();

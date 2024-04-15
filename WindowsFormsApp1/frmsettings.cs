@@ -94,6 +94,7 @@ namespace WindowsFormsApp1
             }
         }
 
+    
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
 
@@ -171,8 +172,10 @@ namespace WindowsFormsApp1
             Variables.setColors(Variables.clrheader, lblcol1);
             Variables.setColorsBunifu(Variables.clrmainbtn, bttntheme, bttnreceipt, bttnaccess, bunifuButton1);
             Variables.setColors(Variables.clrmainbtn, lblcol2);
-            Variables.setColors(Variables.clrsecondarybtn, lblcol3, bttninsert, btncancel, btnok);
+            Variables.setColorsBunifu(Variables.clrsecondarybtn, bttninsert, btncancel, btnok, bttnapply);
+            Variables.setColors(Variables.clrsecondarybtn, lblcol3);
             tblreceipt.HeaderBackColor = Variables.clrheader;
+            tblreceipt.GridColor = Shit.LightenHexColor(Variables.clrheader, 0.7f);
         }
 
         private void bttnapply_Click(object sender, EventArgs e)

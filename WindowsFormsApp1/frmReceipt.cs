@@ -23,6 +23,7 @@ namespace WindowsFormsApp1
             label12.Text = Variables.MAINNAME;
             retrieveValues();
             retrieveReceiptValues();
+
         }
         private void retrieveValues()
         {
