@@ -18,7 +18,22 @@ namespace Cashetor
 
                 timer1.Stop();
 
-                new frmLogin().Show();
+                Variables.MAINNAME = Properties.Settings.Default.mainname;
+                Variables.MAINCOMPANYID = Properties.Settings.Default.maincompanyid;
+                Variables.MAINCOMPANYNAME = Properties.Settings.Default.maincompanyname;
+                Variables.MAINID = Properties.Settings.Default.mainid;
+                Variables.MAINTYPE = Properties.Settings.Default.maintype;
+                Variables.MAINCOMPANYADDR = Properties.Settings.Default.maincompanyaddr;
+                Variables.MAINCOMPANYBID = Properties.Settings.Default.maincompanybid;
+                Program.LoggedIN = Properties.Settings.Default.loggedin;
+                if (Program.LoggedIN == true)
+                {
+                    new frmMain().Show();
+                }
+                else
+                {
+                    new frmLogin().Show();
+                }
 
                 this.Hide();
             }

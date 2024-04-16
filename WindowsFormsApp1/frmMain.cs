@@ -489,7 +489,7 @@ namespace Cashetor
 
         private void btnlogout_Click(object sender, EventArgs e)
         {
-            Variables.MAINNAME="";
+            Variables.MAINNAME=null;
             Variables.MAINCOMPANYID=0;
             Variables.MAINCOMPANYNAME="";
             Variables.MAINID=0;
@@ -498,6 +498,15 @@ namespace Cashetor
             Variables.MAINCOMPANYBID=0;
 
             Program.LoggedIN = false;
+            Properties.Settings.Default.loggedin = false;
+            Properties.Settings.Default.maincompanyid = Variables.MAINCOMPANYID;
+            Properties.Settings.Default.mainname = Variables.MAINNAME;
+            Properties.Settings.Default.mainid = Variables.MAINID;
+            Properties.Settings.Default.maintype = Variables.MAINTYPE;
+            Properties.Settings.Default.maincompanyname = Variables.MAINCOMPANYNAME;
+            Properties.Settings.Default.maincompanyaddr = Variables.MAINCOMPANYADDR;
+            Properties.Settings.Default.maincompanybid = Variables.MAINCOMPANYBID;
+            Properties.Settings.Default.Save();
             Variables.ACCACCESS=false;
             Variables.ACCTYPE=0;
             this.Hide();
@@ -743,7 +752,7 @@ namespace Cashetor
                 {
                     DB.Connect();
 
-                    string query = "UPDATE tblcompany SET CompImg=@1 WHERE CompID=@2);";
+                    string query = "UPDATE tblcompany SET CompImg=@1 WHERE CompID=@2;";
 
                     using (MySqlConnection connection = DB.con)
                     {
@@ -759,7 +768,7 @@ namespace Cashetor
                 }
                 catch (Exception ex)
                 {
-                    AMB.GetInstance().Show(ex.Message, 1500); //pag may error para makita ko ano error
+                    Console.WriteLine(ex.Message); //pag may error para makita ko ano error
                 }
                 finally
                 {

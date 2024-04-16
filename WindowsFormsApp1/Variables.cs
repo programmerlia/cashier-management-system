@@ -9,7 +9,7 @@ namespace Cashetor
 {
     public class Variables
     {
-        public static string MAINNAME;
+        public static string MAINNAME=null;
         public static int MAINCOMPANYID;
         public static string MAINCOMPANYNAME;
         public static int MAINID;
