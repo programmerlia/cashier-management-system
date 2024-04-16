@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges4 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges5 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuAnimatorNS.Animation animation2 = new Bunifu.UI.WinForms.BunifuAnimatorNS.Animation();
+      
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProduct));
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges6 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -48,7 +48,6 @@
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.btnUpload = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bunifuTransition1 = new Bunifu.UI.WinForms.BunifuTransition(this.components);
             this.bunifuButton2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -57,7 +56,6 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
-            this.bunifuTransition1.SetDecoration(this.textBox1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.textBox1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Black;
             this.textBox1.Location = new System.Drawing.Point(21, 289);
@@ -68,7 +66,6 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.bunifuTransition1.SetDecoration(this.label2, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(17, 387);
@@ -84,7 +81,6 @@
             this.bunifuDropdown1.BorderColor = System.Drawing.Color.Silver;
             this.bunifuDropdown1.BorderRadius = 1;
             this.bunifuDropdown1.Color = System.Drawing.Color.Silver;
-            this.bunifuTransition1.SetDecoration(this.bunifuDropdown1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuDropdown1.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
             this.bunifuDropdown1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuDropdown1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -125,7 +121,6 @@
             this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Khaki;
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
-            this.bunifuTransition1.SetDecoration(this.linkLabel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.linkLabel1.LinkColor = System.Drawing.Color.SkyBlue;
             this.linkLabel1.Location = new System.Drawing.Point(181, 397);
             this.linkLabel1.Name = "linkLabel1";
@@ -141,7 +136,6 @@
             this.panel1.Controls.Add(this.linkLabel3);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.linkLabel2);
-            this.bunifuTransition1.SetDecoration(this.panel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.panel1.Location = new System.Drawing.Point(12, 387);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(265, 114);
@@ -153,7 +147,6 @@
             this.linkLabel3.ActiveLinkColor = System.Drawing.Color.Khaki;
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
-            this.bunifuTransition1.SetDecoration(this.linkLabel3, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.linkLabel3.LinkColor = System.Drawing.Color.SkyBlue;
             this.linkLabel3.Location = new System.Drawing.Point(171, 9);
             this.linkLabel3.Name = "linkLabel3";
@@ -166,7 +159,6 @@
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.Color.White;
-            this.bunifuTransition1.SetDecoration(this.textBox2, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.textBox2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.Black;
             this.textBox2.Location = new System.Drawing.Point(9, 24);
@@ -180,7 +172,6 @@
             this.linkLabel2.ActiveLinkColor = System.Drawing.Color.Khaki;
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(95)))), ((int)(((byte)(120)))));
-            this.bunifuTransition1.SetDecoration(this.linkLabel2, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.linkLabel2.LinkColor = System.Drawing.Color.SkyBlue;
             this.linkLabel2.Location = new System.Drawing.Point(212, 9);
             this.linkLabel2.Name = "linkLabel2";
@@ -193,7 +184,6 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.bunifuTransition1.SetDecoration(this.label1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(17, 265);
@@ -206,7 +196,6 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.bunifuTransition1.SetDecoration(this.label3, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(17, 328);
@@ -218,7 +207,6 @@
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.Color.White;
-            this.bunifuTransition1.SetDecoration(this.textBox3, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.textBox3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.Color.Black;
             this.textBox3.Location = new System.Drawing.Point(19, 352);
@@ -250,7 +238,6 @@
             borderEdges4.TopLeft = true;
             borderEdges4.TopRight = true;
             this.bunifuButton1.CustomizableEdges = borderEdges4;
-            this.bunifuTransition1.SetDecoration(this.bunifuButton1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuButton1.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -341,7 +328,6 @@
             borderEdges5.TopLeft = true;
             borderEdges5.TopRight = true;
             this.btnUpload.CustomizableEdges = borderEdges5;
-            this.bunifuTransition1.SetDecoration(this.btnUpload, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.btnUpload.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnUpload.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnUpload.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -411,7 +397,6 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.bunifuTransition1.SetDecoration(this.pictureBox1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.pictureBox1.Location = new System.Drawing.Point(67, 35);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(167, 167);
@@ -421,24 +406,7 @@
             // 
             // bunifuTransition1
             // 
-            this.bunifuTransition1.AnimationType = Bunifu.UI.WinForms.BunifuAnimatorNS.AnimationType.VertSlide;
-            this.bunifuTransition1.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.bunifuTransition1.DefaultAnimation = animation2;
+          
             // 
             // bunifuButton2
             // 
@@ -464,7 +432,6 @@
             borderEdges6.TopLeft = true;
             borderEdges6.TopRight = true;
             this.bunifuButton2.CustomizableEdges = borderEdges6;
-            this.bunifuTransition1.SetDecoration(this.bunifuButton2, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuButton2.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton2.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -549,7 +516,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.pictureBox1);
-            this.bunifuTransition1.SetDecoration(this, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmProduct";
             this.Text = "Form1";
@@ -577,7 +543,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
-        private Bunifu.UI.WinForms.BunifuTransition bunifuTransition1;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton2;
     }
 }

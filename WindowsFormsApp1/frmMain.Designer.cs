@@ -38,7 +38,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.bunifuShapes1 = new Bunifu.UI.WinForms.BunifuShapes();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnlcategory = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -92,7 +91,6 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pclogo);
-            this.panel1.Controls.Add(this.bunifuShapes1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -139,23 +137,7 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
-            // bunifuShapes1
-            // 
-            this.bunifuShapes1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuShapes1.Angle = 0F;
-            this.bunifuShapes1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuShapes1.BorderColor = System.Drawing.Color.Silver;
-            this.bunifuShapes1.BorderThickness = 2;
-            this.bunifuShapes1.FillColor = System.Drawing.Color.Transparent;
-            this.bunifuShapes1.FillShape = true;
-            this.bunifuShapes1.Location = new System.Drawing.Point(222, 58);
-            this.bunifuShapes1.Name = "bunifuShapes1";
-            this.bunifuShapes1.Shape = Bunifu.UI.WinForms.BunifuShapes.Shapes.Line;
-            this.bunifuShapes1.Sides = 5;
-            this.bunifuShapes1.Size = new System.Drawing.Size(764, 26);
-            this.bunifuShapes1.TabIndex = 6;
-            this.bunifuShapes1.Text = "bunifuShapes1";
+          
             // 
             // panel2
             // 
@@ -927,12 +909,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnsearch;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Product;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qtty;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private Bunifu.UI.WinForms.BunifuShapes bunifuShapes1;
         private Bunifu.UI.WinForms.BunifuImageButton bttnsetting;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnreceipt;
