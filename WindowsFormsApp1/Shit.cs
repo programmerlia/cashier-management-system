@@ -45,7 +45,9 @@ public static Color LightenHexColor(Color color, float factor)
         return Color.FromArgb(r, g, b);
     }
 
-    public static void setupTableClr(BunifuDataGridView tbl)
+
+
+        public static void setupTableClr(BunifuDataGridView tbl)
         {
             tbl.ColumnHeadersDefaultCellStyle.SelectionBackColor = Shit.LightenHexColor(Variables.clrheader, 0.1f);
             tbl.ColumnHeadersDefaultCellStyle.BackColor = Variables.clrheader;

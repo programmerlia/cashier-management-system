@@ -114,14 +114,16 @@ namespace Cashetor
                         panel.AutoScroll = true;
 
 
+
                         Label productlbl = new Label();
                         productlbl.BackColor = Variables.clrheader;
                         productlbl.Text = "Product";
                         productlbl.Location = new Point(10, 0);
-                        //productlbl.Padding = new Padding(2, 2, 2, 2);
+                        productlbl.Padding = new Padding(2, 2, 2, 2);
                         productlbl.Font = new Font("Century Gothic", 12, FontStyle.Bold);
                         productlbl.ForeColor = Color.White;
                         panel.Controls.Add(productlbl);
+                        productlbl.Width = 200;
 
                         Label quantlbl = new Label();
                         quantlbl.BackColor = Variables.clrheader;
@@ -132,12 +134,12 @@ namespace Cashetor
                         quantlbl.Font = new Font("Century Gothic", 12, FontStyle.Bold);
                         quantlbl.ForeColor = Color.White;
                         panel.Controls.Add(quantlbl);
+                        quantlbl.Width = 390;
 
 
 
                         int y = productlbl.Height;
                         int count = 0;
-                        int maxwidth = 0;
                         foreach (var kvp in columnTotals)
                         {
                             Label labelColumnName = new Label();
@@ -146,8 +148,12 @@ namespace Cashetor
                             labelColumnName.Location = new Point(10, y);
                             labelColumnName.Padding = new Padding(2, 2, 2, 2);
                             labelColumnName.Font = new Font("Century Gothic", 10);
-                            labelColumnName.AutoSize = true;
                             panel.Controls.Add(labelColumnName);
+                            labelColumnName.AutoSize = true;
+                            labelColumnName.MaximumSize = new Size(productlbl.Width, 0);
+                            labelColumnName.MinimumSize = new Size(productlbl.Width, 0);
+                            labelColumnName.Text = labelColumnName.Text.Replace("_", " ");
+
 
                             Label labelTotalQuantity = new Label();
                             labelColumnName.Name = "labelTotalQuantity";
@@ -156,64 +162,30 @@ namespace Cashetor
                             labelTotalQuantity.Width = quantlbl.Width;
                             labelTotalQuantity.Padding = new Padding(2, 2, 2, 2);
                             labelTotalQuantity.Font = new Font("Century Gothic", 10);
+                            labelTotalQuantity.Height = labelColumnName.Height;
+                            labelTotalQuantity.TextAlign = ContentAlignment.MiddleCenter;
                             panel.Controls.Add(labelTotalQuantity);
 
                             //to alternate between colors
                             if (count % 2 == 0)
                             {
-                                labelColumnName.BackColor = Variables.clrmainbtn;
-                                labelTotalQuantity.BackColor = Variables.clrmainbtn;
+                                labelColumnName.BackColor = Shit.LightenHexColor(Variables.clrmainbtn, .5f);
+                                labelTotalQuantity.BackColor = Shit.LightenHexColor(Variables.clrmainbtn, .5f);
                             }
                             else
                             {
-                                labelColumnName.BackColor = Color.White;
-                                labelTotalQuantity.BackColor = Color.White;
-                            }
-
-                            //,,very inefficient code fot getting longest width for reference mamaya
-                            if (count == 0)
-                            {
-                                if (productlbl.Width >= labelColumnName.Width)
-                                {
-                                    maxwidth = productlbl.Width;
-                                }
-                                else
-                                {
-                                    maxwidth = labelColumnName.Width;
-                                }
-                            }
-                            else
-                            {
-                                if (maxwidth >= labelColumnName.Width)
-                                {
-                                }
-                                else
-                                {
-                                    maxwidth = labelColumnName.Width;
-                                }
+                                labelColumnName.BackColor = Shit.LightenHexColor(Variables.clrmainbtn, .9f);
+                                labelTotalQuantity.BackColor = Shit.LightenHexColor(Variables.clrmainbtn, .9f);
                             }
 
                             count++;
-                            y += labelTotalQuantity.Height;
-                        }
-
-                        //para ma-set yung width labelcolumnname to the longest width (basically para ma-autosize lahat ng width ng labelcolumnnames)
-                        foreach (Label lbl in panel.Controls)
-                        {
-                            if (lbl.Left == 10)
-                            {
-                                lbl.AutoSize = false;
-                                lbl.Width = maxwidth;
-                            }
-                            else
-                            {
-                                lbl.Left = maxwidth + 10;
-                            }
+                            y += labelColumnName.Height;
                         }
 
                         splitContainer1.Panel2.Controls.Add(panel);
                         tbl.Visible = false;
                     }
+
                 }
             }
             catch (Exception ex)
