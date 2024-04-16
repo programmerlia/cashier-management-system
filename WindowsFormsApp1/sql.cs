@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public static class Extensions
     {

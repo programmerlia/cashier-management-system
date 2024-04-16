@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using static Bunifu.UI.WinForms.BunifuSnackbar;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmLogin : Form
     {
@@ -63,6 +63,7 @@ namespace WindowsFormsApp1
                     if (sossss.Equals(true))
                     {
                         new frmMain().Show();
+                        Program.LoggedIN = true;
                         this.Hide();
                     }
                     else

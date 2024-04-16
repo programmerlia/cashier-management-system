@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmCompany : Form
     {
@@ -144,6 +144,7 @@ namespace WindowsFormsApp1
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
+            new frmSignup().Show();
         }
     }
 }

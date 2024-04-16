@@ -22,7 +22,7 @@ using TheArtOfDev.HtmlRenderer.Adapters.Entities;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmsettings : Form
     {
@@ -174,8 +174,7 @@ namespace WindowsFormsApp1
             Variables.setColors(Variables.clrmainbtn, lblcol2);
             Variables.setColorsBunifu(Variables.clrsecondarybtn, bttninsert, btncancel, btnok, bttnapply);
             Variables.setColors(Variables.clrsecondarybtn, lblcol3);
-            tblreceipt.HeaderBackColor = Variables.clrheader;
-            tblreceipt.GridColor = Shit.LightenHexColor(Variables.clrheader, 0.7f);
+            Shit.setupTableClr(tblreceipt);
         }
 
         private void bttnapply_Click(object sender, EventArgs e)

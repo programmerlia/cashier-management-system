@@ -18,7 +18,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Linq.Expressions;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmMain : Form
     {
@@ -497,7 +497,7 @@ namespace WindowsFormsApp1
             Variables.MAINCOMPANYADDR="";
             Variables.MAINCOMPANYBID=0;
 
-
+            Program.LoggedIN = false;
             Variables.ACCACCESS=false;
             Variables.ACCTYPE=0;
             this.Hide();

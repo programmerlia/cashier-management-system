@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmhistory : Form
     {
@@ -18,9 +19,9 @@ namespace WindowsFormsApp1
         public frmhistory()
         {
             InitializeComponent();
-            Variables.setColorsBunifu(Variables.clrmainbtn, bunifuButton1, bunifuButton2, bunifuButton3);
-            tbl.HeaderBackColor = Variables.clrheader;
-            tbl.GridColor = Shit.LightenHexColor(Variables.clrheader, 0.7f);
+            Variables.setColorsBunifu(Variables.clrmainbtn, bunifuButton1, bunifuButton2, bunifuButton3, bunifuButton4);
+            Shit.setupTableClr(tbl);
+
         }
 
         private void sendQuery(string qq)
@@ -57,7 +58,7 @@ namespace WindowsFormsApp1
 
         private void btnsearch_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void bunifuButton3_Click(object sender, EventArgs e)
@@ -80,37 +81,37 @@ namespace WindowsFormsApp1
             try
             {
                 DB.Connect();
-                using (MySqlConnection connection =DB.con)
-            {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlConnection connection = DB.con)
                 {
-                    DataTable dataTable = new DataTable();
-
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        adapter.Fill(dataTable);
-                    }
+                        DataTable dataTable = new DataTable();
 
-                    Dictionary<string, int> columnTotals = new Dictionary<string, int>();
-                    foreach (DataColumn column in dataTable.Columns)
-                    {
-                        if (column.ColumnName != "ID" && column.ColumnName != "Name" && column.ColumnName != "Date" && column.ColumnName != "AccID")
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                         {
-                            int total = 0;
-                            foreach (DataRow row in dataTable.Rows)
-                            {
-                                if (row[column] != DBNull.Value)
-                                {
-                                    total += Convert.ToInt32(row[column]);
-                                }
-                            }
-                            columnTotals.Add(column.ColumnName, total);
+                            adapter.Fill(dataTable);
                         }
-                    }
 
-                    Panel panel = new Panel();
-                    panel.Dock = DockStyle.Fill;
-                    panel.AutoScroll = true;
+                        Dictionary<string, int> columnTotals = new Dictionary<string, int>();
+                        foreach (DataColumn column in dataTable.Columns)
+                        {
+                            if (column.ColumnName != "ID" && column.ColumnName != "Name" && column.ColumnName != "Date" && column.ColumnName != "AccID")
+                            {
+                                int total = 0;
+                                foreach (DataRow row in dataTable.Rows)
+                                {
+                                    if (row[column] != DBNull.Value)
+                                    {
+                                        total += Convert.ToInt32(row[column]);
+                                    }
+                                }
+                                columnTotals.Add(column.ColumnName, total);
+                            }
+                        }
+
+                        Panel panel = new Panel();
+                        panel.Dock = DockStyle.Fill;
+                        panel.AutoScroll = true;
 
 
                         Label productlbl = new Label();
@@ -126,7 +127,7 @@ namespace WindowsFormsApp1
                         quantlbl.BackColor = Variables.clrheader;
                         quantlbl.Text = "Quantity Purchased";
                         quantlbl.AutoSize = true;
-                        quantlbl.Location = new Point(productlbl.Width+10, 0);
+                        quantlbl.Location = new Point(productlbl.Width + 10, 0);
                         quantlbl.Padding = new Padding(2, 2, 2, 2);
                         quantlbl.Font = new Font("Century Gothic", 12, FontStyle.Bold);
                         quantlbl.ForeColor = Color.White;
@@ -137,22 +138,22 @@ namespace WindowsFormsApp1
                         int y = productlbl.Height;
                         int count = 0;
                         int maxwidth = 0;
-                    foreach (var kvp in columnTotals)
-                    {
-                        Label labelColumnName = new Label();
+                        foreach (var kvp in columnTotals)
+                        {
+                            Label labelColumnName = new Label();
                             labelColumnName.Name = "labelColumnName";
-                        labelColumnName.Text = kvp.Key + ":";
-                        labelColumnName.Location = new Point(10, y);
-                            labelColumnName.Padding = new Padding(2,2,2,2);
+                            labelColumnName.Text = kvp.Key + ":";
+                            labelColumnName.Location = new Point(10, y);
+                            labelColumnName.Padding = new Padding(2, 2, 2, 2);
                             labelColumnName.Font = new Font("Century Gothic", 10);
                             labelColumnName.AutoSize = true;
-                        panel.Controls.Add(labelColumnName);
+                            panel.Controls.Add(labelColumnName);
 
-                        Label labelTotalQuantity = new Label();
+                            Label labelTotalQuantity = new Label();
                             labelColumnName.Name = "labelTotalQuantity";
                             labelTotalQuantity.Text = kvp.Value.ToString();
-                        labelTotalQuantity.Location = new Point(labelColumnName.Width+10, y);
-                            labelTotalQuantity.Width=quantlbl.Width;
+                            labelTotalQuantity.Location = new Point(labelColumnName.Width + 10, y);
+                            labelTotalQuantity.Width = quantlbl.Width;
                             labelTotalQuantity.Padding = new Padding(2, 2, 2, 2);
                             labelTotalQuantity.Font = new Font("Century Gothic", 10);
                             panel.Controls.Add(labelTotalQuantity);
@@ -163,7 +164,8 @@ namespace WindowsFormsApp1
                                 labelColumnName.BackColor = Variables.clrmainbtn;
                                 labelTotalQuantity.BackColor = Variables.clrmainbtn;
                             }
-                            else {
+                            else
+                            {
                                 labelColumnName.BackColor = Color.White;
                                 labelTotalQuantity.BackColor = Color.White;
                             }
@@ -180,11 +182,14 @@ namespace WindowsFormsApp1
                                     maxwidth = labelColumnName.Width;
                                 }
                             }
-                            else {
-                                if (maxwidth>=labelColumnName.Width) { 
-                                } else 
-                                { 
-                                    maxwidth = labelColumnName.Width; 
+                            else
+                            {
+                                if (maxwidth >= labelColumnName.Width)
+                                {
+                                }
+                                else
+                                {
+                                    maxwidth = labelColumnName.Width;
                                 }
                             }
 
@@ -193,21 +198,23 @@ namespace WindowsFormsApp1
                         }
 
                         //para ma-set yung width labelcolumnname to the longest width (basically para ma-autosize lahat ng width ng labelcolumnnames)
-                        foreach (Label lbl in panel.Controls) {
+                        foreach (Label lbl in panel.Controls)
+                        {
                             if (lbl.Left == 10)
                             {
-                                lbl.AutoSize=false;
+                                lbl.AutoSize = false;
                                 lbl.Width = maxwidth;
                             }
-                            else {
+                            else
+                            {
                                 lbl.Left = maxwidth + 10;
                             }
                         }
 
-                    splitContainer1.Panel2.Controls.Add(panel);
-                    tbl.Visible = false;
+                        splitContainer1.Panel2.Controls.Add(panel);
+                        tbl.Visible = false;
                     }
-            }
+                }
             }
             catch (Exception ex)
             {
@@ -219,5 +226,68 @@ namespace WindowsFormsApp1
             }
 
         }
+
+        private void bunifuButton4_Click(object sender, EventArgs e)
+        {
+            tbl.Visible = true;
+            GetMonthData();
+
+
+        }
+
+        private void GetMonthData()
+        {
+                try
+                {
+                    DB.Connect();
+
+                    List<string> columnNames = new List<string>();
+                    using (MySqlCommand command = new MySqlCommand($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{tableName}';", DB.con))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                columnNames.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+
+                    List<string> quantityColumnNames = columnNames.Skip(4).ToList();
+
+                    string sumQuery = string.Join(" + ", quantityColumnNames.Select(col => $"COALESCE({col}, 0)"));
+                string query = $@"
+                SELECT 
+                        DATE_FORMAT(Date, '%M') AS Month,
+                        SUM({sumQuery}) AS ProductSold 
+                    FROM {tableName} 
+                    GROUP BY MONTH(Date);
+                ";
+
+                // Execute the query and populate the DataGridView
+                using (MySqlCommand command = new MySqlCommand(query, DB.con))
+                    {
+                        DataTable dataTable = new DataTable();
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+
+                        tbl.DataSource = dataTable;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    DB.Disconnect();
+                }
+            }
+
+
+
+
     }
 }

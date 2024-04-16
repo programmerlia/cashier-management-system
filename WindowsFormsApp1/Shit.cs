@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Bunifu.UI.WinForms;
+using MySqlX.XDevAPI.Relational;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     internal class Shit
     {
@@ -43,6 +45,13 @@ public static Color LightenHexColor(Color color, float factor)
         return Color.FromArgb(r, g, b);
     }
 
-
+    public static void setupTableClr(BunifuDataGridView tbl)
+        {
+            tbl.ColumnHeadersDefaultCellStyle.SelectionBackColor = Shit.LightenHexColor(Variables.clrheader, 0.1f);
+            tbl.ColumnHeadersDefaultCellStyle.BackColor = Variables.clrheader;
+            tbl.RowsDefaultCellStyle.BackColor = Color.White;
+            tbl.RowsDefaultCellStyle.SelectionBackColor = Shit.LightenHexColor(Variables.clrsecondarybtn, 0.9f);
+            ;
+        }
 }
 }

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Bunifu.UI.WinForms.BunifuButton;
 using System.Collections;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public class Variables
     {

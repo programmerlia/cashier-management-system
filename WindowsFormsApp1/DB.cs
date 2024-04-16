@@ -2,7 +2,7 @@
 using System;
 
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public static class DB
     {

@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmSignup : Form
     {

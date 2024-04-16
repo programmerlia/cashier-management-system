@@ -49,9 +49,7 @@ C:\Users\Elizabeth\Source\Repos\cashier-management-system\WindowsFormsApp1\obj\D
 C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmProduct.resources
 C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmsettings.resources
 C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmReceipt.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmhistory.resources
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\BouncyCastle.Cryptography.dll
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Bunifu.Licensing.dll
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Bunifu.UI.WinForms.1.5.3.dll
@@ -118,21 +116,28 @@ C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\cms.csproj.AssemblyReference.cache
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\cms.csproj.SuggestedBindingRedirects.cache
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AMB.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmCompany.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmLogin.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmMain.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmProduct.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmReceipt.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmsettings.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmSignup.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmSplashScreen.resources
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\cms.csproj.GenerateResource.cache
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.licenses
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\cms.csproj.CoreCompileInputs.cache
 C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\cms.csproj.CopyComplete
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
-C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmhistory.resources
-C:\Users\Elizabeth\source\repos\cashier-management-system\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frmhistory.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.Properties.Resources.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.exe.licenses
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Cashetor.exe.config
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Cashetor.exe.manifest
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Cashetor.application
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Cashetor.exe
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\bin\Debug\Cashetor.pdb
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.AMB.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmCompany.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmhistory.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmLogin.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmMain.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmProduct.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmReceipt.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmsettings.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmSignup.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.frmSplashScreen.resources
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.TrustInfo.xml
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.exe.manifest
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.application
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.exe
+C:\Users\testing101\Documents\User - Hannali\test\mains uis\cms\WindowsFormsApp1\obj\Debug\Cashetor.pdb

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace WindowsFormsApp1
+namespace Cashetor
 {
     public partial class frmProduct : Form
     {
@@ -67,6 +67,7 @@ namespace WindowsFormsApp1
 
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
             finally
             {

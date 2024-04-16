@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace Cashetor
 {
     partial class frmCompany
     {
@@ -146,7 +146,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = global::WindowsFormsApp1.Properties.Resources.logo;
+            this.pictureBox2.Image = global::Cashetor.Properties.Resources.logo;
             this.pictureBox2.Location = new System.Drawing.Point(928, -1);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";

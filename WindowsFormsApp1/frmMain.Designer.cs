@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace Cashetor
 {
     partial class frmMain
     {
@@ -473,8 +473,7 @@
             this.bttnsetting.ErrorImage = ((System.Drawing.Image)(resources.GetObject("bttnsetting.ErrorImage")));
             this.bttnsetting.FadeWhenInactive = false;
             this.bttnsetting.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
-            this.bttnsetting.Image = global::WindowsFormsApp1.Properties.Resources.settings;
-            this.bttnsetting.ImageActive = null;
+            this.bttnsetting.Image = global::Cashetor.Properties.Resources.settings;
             this.bttnsetting.ImageLocation = null;
             this.bttnsetting.ImageMargin = 0;
             this.bttnsetting.ImageSize = new System.Drawing.Size(31, 31);
@@ -492,7 +491,6 @@
             this.bttnsetting.TabIndex = 7;
             this.bttnsetting.ToolTipText = "";
             this.bttnsetting.WaitOnLoad = false;
-            this.bttnsetting.Zoom = 0;
             this.bttnsetting.ZoomSpeed = 10;
             this.bttnsetting.Click += new System.EventHandler(this.bttnsetting_Click);
             // 

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace Cashetor
 {
     partial class frmLogin
     {
@@ -337,7 +337,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(85)))), ((int)(((byte)(120)))));
-            this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.login;
+            this.pictureBox1.Image = global::Cashetor.Properties.Resources.login;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";

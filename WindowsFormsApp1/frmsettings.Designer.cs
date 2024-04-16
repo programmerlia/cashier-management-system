@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace Cashetor
 {
     partial class frmsettings
     {
@@ -352,7 +352,6 @@
             this.tblreceipt.EnableHeadersVisualStyles = false;
             this.tblreceipt.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
             this.tblreceipt.HeaderBackColor = System.Drawing.Color.FloralWhite;
-            this.tblreceipt.HeaderBgColor = System.Drawing.Color.Empty;
             this.tblreceipt.HeaderForeColor = System.Drawing.Color.White;
             this.tblreceipt.Location = new System.Drawing.Point(30, 20);
             this.tblreceipt.Name = "tblreceipt";
