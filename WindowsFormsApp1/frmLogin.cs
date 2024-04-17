@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Cashetor.Properties;
+using MySql.Data.MySqlClient;
 using System;
 using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace Cashetor
     {
         public frmLogin()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -63,6 +64,12 @@ namespace Cashetor
                     {
                         new frmMain().Show();
                         Program.LoggedIN = true;
+                        Properties.Settings.Default.loggedin=true;
+                        Properties.Settings.Default.maincompanyid=Variables.MAINCOMPANYID;
+                        Properties.Settings.Default.mainname=Variables.MAINNAME;
+                        Properties.Settings.Default.mainid=Variables.MAINID;
+                        Properties.Settings.Default.maintype=Variables.MAINTYPE;
+                        Properties.Settings.Default.Save();
                         this.Hide();
                     }
                     else
@@ -109,6 +116,8 @@ namespace Cashetor
                                 Variables.MAINCOMPANYBID = reader.GetInt32("CompBID");
                             }
                         }
+                        Properties.Settings.Default.maincompanyname = Variables.MAINCOMPANYNAME;
+                        Properties.Settings.Default.Save();
                     }
                 }
             }

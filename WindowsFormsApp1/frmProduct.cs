@@ -147,9 +147,8 @@ namespace Cashetor
 
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
-
             string pclass = bunifuDropdown1.SelectedItem.ToString();
-      
+
             int pclassid = getPclassId(pclass);
 
 

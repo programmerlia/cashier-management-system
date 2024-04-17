@@ -554,6 +554,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmCompany";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCompany";
             this.Load += new System.EventHandler(this.frmCompany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

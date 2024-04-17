@@ -60,7 +60,7 @@ namespace Cashetor
                 {
                     pictureBox1.Image = Properties.Resources.logo;
                 }
-
+                int insertedid = 0;
                 try
                 {
                     DB.Connect();
@@ -78,6 +78,7 @@ namespace Cashetor
                             command.Parameters.AddWithValue("@CompType", textBox4.Text);
                             command.Parameters.AddWithValue("@CompImg", Shit.ImageToBlob(pictureBox1.Image)); //basta yung func return sya ng blob, img as parameters
                             command.ExecuteNonQuery();
+                            insertedid = Convert.ToInt32(command.LastInsertedId);
                             sql.addHistTbl(textBox2.Text.ToString());
                         }
                     }
@@ -101,8 +102,8 @@ namespace Cashetor
                     DB.Connect();
 
                     //set theme colors ng newly created company to default theme color
-                    string queryy = "INSERT INTO tbltheme (colorheader, colormainbutton, colorsecondarybutton) " +
-                                    "VALUES (@colorheader, @colormainbutton, @colorsecondarybutton);";
+                    string queryy = "INSERT INTO tbltheme (CompID, colorheader, colormainbutton, colorsecondarybutton) " +
+                                    "VALUES (@1, @colorheader, @colormainbutton, @colorsecondarybutton);";
 
                     using (MySqlConnection connection = DB.con)
                     {
@@ -112,6 +113,7 @@ namespace Cashetor
                             command.Parameters.AddWithValue("@colorheader", "#485f78");
                             command.Parameters.AddWithValue("@colormainbutton", "#99B4D1");
                             command.Parameters.AddWithValue("@colorsecondarybutton", "#696969");
+                            command.Parameters.AddWithValue("@1", insertedid);
                             command.ExecuteNonQuery();
                         }
                     }

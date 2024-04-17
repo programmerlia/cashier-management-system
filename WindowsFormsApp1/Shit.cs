@@ -28,10 +28,10 @@ namespace Cashetor
             return Color.FromArgb(r, g, b);
         }
 
-
-public static Color LightenHexColor(Color color, float factor)
+        private static String ToHex(System.Drawing.Color c) => $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+        public static Color LightenHexColor(Color color, float factor)
     {
-            string hexColor = ColorTranslator.ToHtml(color);
+            string hexColor = ToHex(color);
             hexColor = hexColor.TrimStart('#');
 
         int r = int.Parse(hexColor.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);

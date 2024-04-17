@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Linq.Expressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace Cashetor
 {
@@ -139,7 +140,7 @@ namespace Cashetor
                 MySqlDataReader reader = msn.ExecuteReader();
                 if (!reader.HasRows)
                 {
-                    Label labelno = new Label { Text = "NO PRODUCTS FOUND", Font = new Font("Century Gothic", 20, FontStyle.Bold), Location = new Point(0, 0), TextAlign = ContentAlignment.MiddleCenter};
+                    Label labelno = new Label { Text = "NO PRODUCTS FOUND", Font = new Font("Century Gothic", 20, FontStyle.Bold), Location = new Point(0, 0), TextAlign = ContentAlignment.MiddleCenter };
                     labelno.Size = flowLayoutPanel1.Size;
                     flowLayoutPanel1.Controls.Add(labelno);
                     btnreceipt.Visible = false;
@@ -156,6 +157,7 @@ namespace Cashetor
 
                         PictureBox pictureBox = new PictureBox { SizeMode = PictureBoxSizeMode.StretchImage, Size = new Size(80, 80), Location = new Point(30, 10), };
                         pictureBox.Click += buttonOrder_Click;
+                        pictureBox.Cursor = Cursors.Hand;
                         byte[] imageData = (byte[])reader["ProdImg"];
                         using (MemoryStream ms = new MemoryStream(imageData))
                         {
@@ -163,6 +165,11 @@ namespace Cashetor
                         }
                         bunifuCard.Controls.Add(pictureBox);
                         pictureBox.Left = (pictureBox.Parent.Width - pictureBox.Width) / 2;
+
+
+                        ContextMenu cm = new ContextMenu();
+                        cm.MenuItems.Add("Delete", new EventHandler(item1_Click));
+                        pictureBox.ContextMenu = cm;
 
 
                         Label labelProdName = new Label
@@ -174,7 +181,7 @@ namespace Cashetor
                             Padding = new Padding(2, 0, 2, 0),
                             Name = "labelProdName",
                             Width = bunifuCard.Width,
-                           
+
                         };
                         Size size = TextRenderer.MeasureText(labelProdName.Text, labelProdName.Font, new Size(labelProdName.Width, int.MaxValue), TextFormatFlags.WordBreak);
                         labelProdName.Height = size.Height;
@@ -187,13 +194,13 @@ namespace Cashetor
                             Text = reader.GetDouble("Price").ToString(),
                             Font = new Font("Century Gothic", 8),
                             Location = new Point(labelProdName.Location.X, labelProdName.Location.Y + labelProdName.Height + 5),
-                        TextAlign = ContentAlignment.MiddleCenter,
+                            TextAlign = ContentAlignment.MiddleCenter,
                             Name = "labelPrice",
                             Padding = new Padding(2, 0, 2, 0),
                             Width = bunifuCard.Width
                         };
                         Size size2 = TextRenderer.MeasureText(labelPrice.Text, labelPrice.Font, new Size(labelPrice.Width, int.MaxValue), TextFormatFlags.WordBreak);
-                        
+
                         labelPrice.Height = size2.Height;
                         bunifuCard.Controls.Add(labelPrice);
 
@@ -214,9 +221,73 @@ namespace Cashetor
         }
 
 
+        private void Item2_Click(object sender, EventArgs e)
+        {
+            MenuItem lal = (MenuItem)sender;
+            ContextMenu cm = lal.GetContextMenu();
+            Control p = cm.SourceControl as Control;
+            Control fl = p.Parent;
+            fl.Controls.Remove(p);
+            updateTotal();
+        }
+
+                private void item1_Click(object sender, EventArgs e)
+        {
+            MenuItem lal = (MenuItem)sender;
+            ContextMenu cm = lal.GetContextMenu();
+            Control pb = cm.SourceControl as Control;
+            Control button = pb.Parent;
+            button.Parent.Controls.Remove(button);  
+
+            Console.WriteLine(button.ToString());
+            Label lbl2 = button.Controls.OfType<Label>().FirstOrDefault(b => b.Name == "labelProdName");
+            Console.WriteLine(lbl2.Text);
+
+            foreach (Control control in flowLayoutPanel2.Controls)
+            {
+                foreach (Label l in control.Controls)
+                {
+                    if (l.Text == lbl2.Text)
+                    {
+                        l.Parent.Parent.Controls.Remove(control);
+                        updateTotal();
+                        break;
+                    }
+                    break;
+                }
 
 
+            }
 
+            try
+            {
+
+                DB.Connect();
+
+                string query = "DELETE FROM tblproduct WHERE ProdComp =@CompID AND ProdName =@1;";
+                
+                using (MySqlConnection connection = DB.con)
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@CompID", Variables.MAINCOMPANYID);
+                        command.Parameters.AddWithValue("@1", lbl2.Text);
+                        command.ExecuteNonQuery();
+                    }
+                }
+              
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                DB.Disconnect();
+            }
+
+        }
 
         private void btnsearch_Click(object sender, EventArgs e) => loadProducts("SELECT * FROM tblproduct WHERE ProdComp=@CompID AND ProdName LIKE @ProdName");
 
@@ -489,7 +560,7 @@ namespace Cashetor
 
         private void btnlogout_Click(object sender, EventArgs e)
         {
-            Variables.MAINNAME="";
+            Variables.MAINNAME=null;
             Variables.MAINCOMPANYID=0;
             Variables.MAINCOMPANYNAME="";
             Variables.MAINID=0;
@@ -498,6 +569,15 @@ namespace Cashetor
             Variables.MAINCOMPANYBID=0;
 
             Program.LoggedIN = false;
+            Properties.Settings.Default.loggedin = false;
+            Properties.Settings.Default.maincompanyid = Variables.MAINCOMPANYID;
+            Properties.Settings.Default.mainname = Variables.MAINNAME;
+            Properties.Settings.Default.mainid = Variables.MAINID;
+            Properties.Settings.Default.maintype = Variables.MAINTYPE;
+            Properties.Settings.Default.maincompanyname = Variables.MAINCOMPANYNAME;
+            Properties.Settings.Default.maincompanyaddr = Variables.MAINCOMPANYADDR;
+            Properties.Settings.Default.maincompanybid = Variables.MAINCOMPANYBID;
+            Properties.Settings.Default.Save();
             Variables.ACCACCESS=false;
             Variables.ACCTYPE=0;
             this.Hide();
@@ -519,6 +599,11 @@ namespace Cashetor
 
             };
             flowLayoutPanel2.Controls.Add(panpan);
+
+
+            ContextMenu cm = new ContextMenu();
+            cm.MenuItems.Add("Delete", new EventHandler(Item2_Click));
+            panpan.ContextMenu = cm;
 
 
             Label labelName = new Label { 
@@ -600,13 +685,14 @@ namespace Cashetor
                 TextAlign = ContentAlignment.MiddleRight, 
                 Font = new Font("Century Gothic", 10), 
                 ForeColor = Color.White, 
-                Location = new Point(250, 0),
+                Location = new Point(buttonPlus.Width+buttonPlus.Left +10, 0),
                 Size = new Size(55, panpan.Height),
-                Anchor = AnchorStyles.Right
             };
             labelPriceNew.Name = "labelPriceNew";
             panpan.Controls.Add(labelPriceNew);
 
+
+        
             //label na mag-stostore nung actual double na price
             Label labelPriceActual = new Label { Text = p, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Century Gothic", 10), ForeColor = Color.White, Location = new Point(0, 7), Size = new Size(45, 37), Visible=false };
             labelPriceActual.Name = "labelPriceActual";
@@ -629,8 +715,6 @@ namespace Cashetor
 
 
         }
-
-
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -743,7 +827,7 @@ namespace Cashetor
                 {
                     DB.Connect();
 
-                    string query = "UPDATE tblcompany SET CompImg=@1 WHERE CompID=@2);";
+                    string query = "UPDATE tblcompany SET CompImg=@1 WHERE CompID=@2;";
 
                     using (MySqlConnection connection = DB.con)
                     {
@@ -759,7 +843,7 @@ namespace Cashetor
                 }
                 catch (Exception ex)
                 {
-                    AMB.GetInstance().Show(ex.Message, 1500); //pag may error para makita ko ano error
+                    Console.WriteLine(ex.Message); //pag may error para makita ko ano error
                 }
                 finally
                 {
@@ -789,6 +873,11 @@ namespace Cashetor
         {
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.Black;
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }
