@@ -116,6 +116,7 @@ namespace Cashetor
                                 Variables.MAINCOMPANYBID = reader.GetInt32("CompBID");
                             }
                         }
+                        reader.Close();
                         Properties.Settings.Default.maincompanyname = Variables.MAINCOMPANYNAME;
                         Properties.Settings.Default.Save();
                     }

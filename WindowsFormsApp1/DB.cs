@@ -20,9 +20,8 @@ namespace Cashetor
                 con.Open();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                AMB.GetInstance().Show(ex.Message, 1500);
             }
 
         }

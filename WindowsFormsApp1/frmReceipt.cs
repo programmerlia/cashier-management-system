@@ -124,11 +124,13 @@ namespace Cashetor
                             rowheight = recpan.Height;
                             rowcount++;
                         }
+                        
                     }
                     //flowLayoutPanel3.Height = rowheight * rowcount;
                     //label6.Top = flowLayoutPanel3.Top + flowLayoutPanel3.Height;
                 }
                 label6.Text = "Amount Due: P" + amountdue.ToString();
+                
             }
             catch (Exception ex)
             {

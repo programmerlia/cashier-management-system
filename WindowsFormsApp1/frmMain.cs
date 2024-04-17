@@ -357,6 +357,7 @@ namespace Cashetor
                             pnlcategory.Controls.Add(btnCategory);
                         }
                     }
+                    reader.Close();
                 }
             }
             catch (Exception ex)

@@ -183,7 +183,7 @@ namespace Cashetor
             {
                 DB.Connect();
 
-                string queryy = "UPDATE tbltheme SET colorheader=@colorheader, colormainbutton=@colormainbutton, colorsecondarybutton=@colorsecondarybutton WHERE ThemeID=@ID;";
+                string queryy = "UPDATE tbltheme SET colorheader=@colorheader, colormainbutton=@colormainbutton, colorsecondarybutton=@colorsecondarybutton WHERE CompID=@ID;";
 
                 Variables.clrheader = lblcol1.BackColor;
                 Variables.clrmainbtn = lblcol2.BackColor;
@@ -316,6 +316,7 @@ namespace Cashetor
 
                                 tblreceipt.Rows.Add(details, amount);
                             }
+                            reader.Close();
                         }
                     }
                 }

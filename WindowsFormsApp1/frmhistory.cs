@@ -222,6 +222,7 @@ namespace Cashetor
                             {
                                 columnNames.Add(reader.GetString(0));
                             }
+                        reader.Close();
                         }
                     }
 

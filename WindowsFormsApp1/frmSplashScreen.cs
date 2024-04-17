@@ -26,6 +26,7 @@ namespace Cashetor
                 Variables.MAINCOMPANYADDR = Properties.Settings.Default.maincompanyaddr;
                 Variables.MAINCOMPANYBID = Properties.Settings.Default.maincompanybid;
                 Program.LoggedIN = Properties.Settings.Default.loggedin;
+                Properties.Settings.Default.Save();
                 if (Program.LoggedIN == true)
                 {
                     new frmMain().Show();
